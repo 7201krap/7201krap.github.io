@@ -95,6 +95,7 @@ table.cv td:first-child {
   margin-bottom: 20px;
 }
 .hero h1 { color: #fff; }
+.kname { font-size: 17px; font-weight: normal; color: #f0d9dd; margin-left: 10px; white-space: nowrap; }
 .hero .tagline { color: #f0d9dd; }
 .hero a { color: #ffd9de; border-bottom-color: #b3616d; }
 .hero a:hover { border-bottom-color: #fff; }
