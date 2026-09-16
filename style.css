@@ -91,6 +91,7 @@ table.cv td:first-child {
   border-radius: 6px;
   background: #7a1c2b;
   color: #fff;
+  margin-bottom: 20px;
 }
 .hero h1 { color: #fff; }
 .hero .tagline { color: #f0d9dd; }
