@@ -43,7 +43,7 @@ h2 {
   border-radius: 6px;
 }
 .sec:nth-of-type(even) {
-  background: #f7f4ee;
+  background: #faf8f4;
 }
 .sec + .sec {
   margin-top: 8px;
