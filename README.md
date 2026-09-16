@@ -7,7 +7,6 @@ Plain HTML/CSS, no build step.
 - `index.html` — page content (edit this to update bio, news, publications, etc.)
 - `style.css` — styles (light/dark via `prefers-color-scheme`)
 - `photo.jpg` — profile photo (add your own, square ~600×600; a "JP" placeholder shows until then)
-- `Jin_Hyun_Park_CV.pdf` — CV linked from the nav
 - `CNAME` — custom domain for GitHub Pages
 - `.nojekyll` — tells GitHub Pages to serve files as-is
 
