@@ -1,9 +1,6 @@
-// Sidebar open/close toggle. State is remembered per browser.
+// Sidebar open/close toggle.
 (function () {
-  var KEY = 'sideCollapsed';
-  var collapsed = false;
-  try { collapsed = localStorage.getItem(KEY) === '1'; } catch (e) {}
-  if (collapsed) document.documentElement.classList.add('side-collapsed');
+  // The sidebar always starts open when a page is loaded.
 
   document.addEventListener('DOMContentLoaded', function () {
     var btn = document.createElement('button');
@@ -14,8 +11,7 @@
     btn.textContent = '☰';
     document.body.appendChild(btn);
     btn.addEventListener('click', function () {
-      var on = document.documentElement.classList.toggle('side-collapsed');
-      try { localStorage.setItem(KEY, on ? '1' : '0'); } catch (e) {}
+      document.documentElement.classList.toggle('side-collapsed');
     });
   });
 })();

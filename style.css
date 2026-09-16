@@ -186,8 +186,8 @@ table.cv td:first-child {
 /* sidebar toggle */
 .side-toggle {
   position: fixed;
-  top: 12px;
-  left: 12px;
+  top: 16px;
+  left: 16px;
   z-index: 20;
   width: 34px;
   height: 34px;
@@ -202,7 +202,7 @@ table.cv td:first-child {
   padding: 0;
 }
 .side-toggle:hover { background: rgba(255,255,255,0.22); }
-.side { padding-top: 58px; transition: width 0.18s ease, flex-basis 0.18s ease, padding 0.18s ease; }
+.side { padding-top: 84px; transition: width 0.18s ease, flex-basis 0.18s ease, padding 0.18s ease; }
 .side-collapsed .side { width: 0; flex-basis: 0; padding-left: 0; padding-right: 0; overflow: hidden; }
 .side-collapsed .side-toggle { background: #7a1c2b; }
 .side-collapsed .side-toggle:hover { background: #5e1421; }
