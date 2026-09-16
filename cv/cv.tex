@@ -1,0 +1,232 @@
+% Jin Hyun Park - Curriculum Vitae
+% Build: pdflatex cv.tex  (run twice)
+\documentclass[10pt,letterpaper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[sups,scaled=1.02]{XCharter}
+\usepackage[margin=0.7in,top=0.6in,bottom=0.65in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{needspace}
+
+\definecolor{maroon}{HTML}{7A1C2B}
+\definecolor{gray}{HTML}{555555}
+\definecolor{rule}{HTML}{C9C4BA}
+
+\hypersetup{colorlinks=true, urlcolor=maroon, linkcolor=maroon}
+\urlstyle{same}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\small\color{gray}Jin Hyun Park}
+\fancyfoot[C]{\small\color{gray}\thepage\ / \pageref{LastPage}}
+\fancyfoot[R]{\small\color{gray}Updated September 2026}
+
+% Section headings: small caps, maroon, thin rule
+\titleformat{\section}{\color{maroon}\large\scshape\bfseries}{}{0pt}{}[{\color{rule}\titlerule[0.6pt]}]
+\titlespacing*{\section}{0pt}{9pt}{4pt}
+\let\oldsection\section
+\renewcommand{\section}[1]{\needspace{5\baselineskip}\oldsection{#1}}
+
+\setlist[itemize]{leftmargin=1.25em, itemsep=1pt, topsep=1pt, parsep=0pt, label=\textcolor{gray}{\textbullet}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+% Entry: \entry{title}{dates}{subtitle}
+\newcommand{\entry}[3]{%
+  \par\vspace{4pt}%
+  \begin{tabularx}{\textwidth}{@{}X@{\hspace{1em}}r@{}}
+    \textbf{#1} & \textcolor{gray}{#2}\\
+    {#3} & \\
+  \end{tabularx}\par\vspace{-2pt}}
+
+% Entry without subtitle
+\newcommand{\entryone}[2]{%
+  \par\vspace{4pt}%
+  \begin{tabularx}{\textwidth}{@{}X@{\hspace{1em}}r@{}}
+    \textbf{#1} & \textcolor{gray}{#2}\\
+  \end{tabularx}\par\vspace{-2pt}}
+
+% Publication: \pub{tag}{authors}{title}{venue}{link}
+\newcommand{\pub}[5]{%
+  \par\vspace{4pt}%
+  \begin{tabularx}{\textwidth}{@{}p{2.9em}@{}X@{}}
+    \textcolor{maroon}{[#1]} & #2. \emph{#3}. #4.\ifx\\#5\\\else\ #5\fi\\
+  \end{tabularx}}
+
+\newcommand{\me}{\textbf{Jin Hyun Park}}
+
+\begin{document}
+
+% ---------------- Header ----------------
+\begin{center}
+  {\Huge\bfseries Jin Hyun Park}\\[3pt]
+  {\normalsize\color{gray}Ph.D. Student, Computer Science and Engineering, Texas A\&M University}\\[6pt]
+  {\small
+    \faEnvelope\ \href{mailto:jinhyun.park@tamu.edu}{jinhyun.park@tamu.edu}\quad
+    \faGlobe\ \href{https://jinhyunpark.com}{jinhyunpark.com}\quad
+    \faGraduationCap\ \href{https://scholar.google.com/citations?user=D29N4akAAAAJ}{Google Scholar}\quad
+    \faGithub\ \href{https://github.com/7201krap}{7201krap}\quad
+    \faLinkedin\ \href{https://www.linkedin.com/in/jinhyunjasonpark/}{jinhyunjasonpark}
+  }
+\end{center}
+
+% ---------------- Research Interests ----------------
+\section{Research Interests}
+Machine learning, computational neuroscience, and natural language processing. In particular,
+biologically inspired neural network architectures, the evolutionary origins of predictive behavior,
+and learning-based control for physical systems.
+
+% ---------------- Education ----------------
+\section{Education}
+
+\entry{Ph.D. in Computer Science and Engineering}{Aug 2022 -- May 2027 (expected)}
+      {Texas A\&M University, College Station, TX, USA \quad\textcolor{gray}{Advisor: Yoonsuck Choe}}
+
+\entry{B.Sc. in Computer Science, First Class Honours}{Sep 2017 -- Jul 2021}
+      {University of Bristol, Bristol, UK \quad\textcolor{gray}{Supervisors: Rui Ponte Costa, Cian O'Donnell}}
+
+% ---------------- Publications ----------------
+\section{Publications}
+{\small\color{gray}C: conference, J: journal, W: workshop, A: arXiv preprint. * denotes equal contribution.\par}
+
+\pub{C2}{Soha Lee, Soojin Lee, Heesung Yang, Hyunju Song, Hyunji Lee, Jinsan An, Jeongwan Shin, \me, Jun Lee, Hyeyoung Park, Kilim Nam}
+    {KoNeoBench: A Curated Evaluation Dataset for LLM Understanding of Korean Neologisms}
+    {Findings of EMNLP, 2026}{}
+
+\pub{C1}{Seyyed Ali Ayati*, \me*, Yichen Cai, Marcus Botacin}
+    {Making Acoustic Side-Channel Attacks on Noisy Keyboards Viable with LLM-Assisted Spectrograms' ``Typo'' Correction}
+    {19th USENIX Workshop on Offensive Technologies (WOOT), 2025}
+    {\href{https://arxiv.org/abs/2504.11622}{arXiv:2504.11622}}
+
+\pub{J1}{William Kang, Chris Anand, \me, Yoonsuck Choe}
+    {Evolutionary Factors Contributing to the Emergence of Prediction}
+    {Adaptive Behavior, 2025}
+    {\href{https://journals.sagepub.com/doi/10.1177/10597123251364746}{doi:10.1177/10597123251364746}}
+
+\pub{W1}{Alex Alvarez*, \me*, Yoonsuck Choe}
+    {Saliency Thresholds in Neural Code and its Relation to the Power-Law, Gaussian, and Lambert W Function}
+    {NeurIPS Workshop on Symmetry and Geometry in Neural Representations (NeurReps), 2025}
+    {\href{https://openreview.net/forum?id=cjo2oadaRz}{OpenReview}}
+
+\pub{A2}{\me, Cheng Zhang, Yoonsuck Choe}
+    {Incorporating Visual Cortical Lateral Connection Properties into CNN: Recurrent Activation and Excitatory-Inhibitory Separation}
+    {arXiv preprint, 2025}
+    {\href{https://arxiv.org/abs/2509.15460}{arXiv:2509.15460}}
+
+\pub{A1}{\me}
+    {Representations Learnt by SGD and Adaptive Learning Rules: Conditions that Vary Sparsity and Selectivity in Neural Networks}
+    {arXiv preprint, 2022}
+    {\href{https://arxiv.org/abs/2201.11653}{arXiv:2201.11653}}
+
+% ---------------- Research Experience ----------------
+\section{Research Experience}
+
+\entry{Physical AI Ph.D. Fellow}{Feb 2026 -- Present}
+      {Doosan Corporation, Seoul, Korea}
+
+\entry{Graduate Research Assistant}{Aug 2022 -- Present}
+      {Brain Networks Lab, Texas A\&M University \quad\textcolor{gray}{Advisor: Yoonsuck Choe}}
+\begin{itemize}
+  \item Biologically inspired neural networks: incorporated visual-cortex lateral connectivity (recurrent activation, excitatory--inhibitory separation) into CNNs [A2] and analyzed saliency thresholds in neural codes [W1].
+  \item Evolution of prediction: studied the evolutionary factors that give rise to predictive behavior in simulated agents [J1].
+  \item Learning-based control: developed an AI-driven smart thermostat for floor-heating systems.
+\end{itemize}
+
+\entry{Research Assistant}{Jan 2022 -- Jul 2022}
+      {Multimodal Language and Cognition Lab, Kyungpook National University, Daegu, Korea}
+\begin{itemize}
+  \item Research on classical NLP algorithms and large language models.
+  \item Organized a reinforcement learning seminar series for lab members, with lecture notes and code samples.
+\end{itemize}
+
+% ---------------- Industry Experience ----------------
+\section{Industry Experience}
+
+\entry{Machine Learning Engineer Intern}{May -- Aug 2023; Jul -- Aug 2025}
+      {Machine Learning Team, Tilda Corp., Seoul, Korea}
+\begin{itemize}
+  \item 2025: Meta-heuristic and neural methods for vehicle routing, multi-agent path finding, and time-series forecasting.
+  \item 2023: Machine learning solutions based on a neural-network-guided genetic algorithm.
+\end{itemize}
+
+\entry{Machine Learning Engineer Intern}{Jul -- Aug 2024}
+      {AI Service Part, Digital Innovation Team, Samsung Life Insurance, Seoul, Korea}
+\begin{itemize}
+  \item Built an automatic PDF parsing pipeline and a retrieval-augmented (RAG) search engine for insurance documents and policy retrieval.
+\end{itemize}
+
+\entry{Machine Learning Engineer Intern}{May -- Jul 2024}
+      {AI Prediction Tech Team, Data Science Lab, LG Uplus, Seoul, Korea}
+\begin{itemize}
+  \item Ensemble and transformer models for identifying outbound roaming travelers.
+  \item Large-scale data generation, preprocessing, and visualization with SQL and Google BigQuery.
+\end{itemize}
+
+\entry{Business Strategy Intern}{Oct -- Dec 2021}
+      {Commercial Vehicle Business Innovation Team, Hyundai Motor Company, Seoul, Korea}
+\begin{itemize}
+  \item Short- to long-term business modeling for commercial vehicles, with a focus on FCEV and BEV.
+\end{itemize}
+
+% ---------------- Teaching & Service ----------------
+\section{Teaching and Service}
+
+\entryone{Reviewer / Program Committee}{}
+AAAI 2024, 2025, 2026; AAAI-AIA 2026; AAAI-Demo 2026; IEEE Transactions on Cognitive and Developmental Systems 2025; NeurIPS NeurReps Workshop 2026.
+
+\entryone{Teaching Assistant}{2022 -- Present}
+CSCE 420/625 Artificial Intelligence, Texas A\&M University.
+
+\entryone{Seminar}{2025}
+Seminar on large language models, Yonsei University.
+
+% ---------------- Selected Projects ----------------
+\section{Selected Projects}
+
+\entry{Depth- and Attention-Aware RGB Image Inpainting}{2025}
+      {Course project, Computational Photography \quad \href{https://arxiv.org/abs/2505.00735}{arXiv:2505.00735}}
+\begin{itemize}
+  \item Dual-encoder attention architecture fusing RGB and depth features; outperforms RGB-only baselines on several metrics, with Grad-CAM confirming improved spatial reasoning.
+\end{itemize}
+
+\entry{PEPSE: Personal Photo Search Engine}{2024}
+      {Course project, Information Storage and Retrieval}
+\begin{itemize}
+  \item Semantic photo search combining caption generation, query embedding, and face recognition with pre-trained transformer models.
+\end{itemize}
+
+% ---------------- Honors ----------------
+\section{Fellowships, Grants, and Awards}
+
+\entryone{Physical AI Ph.D. Fellowship, Doosan Corporation}{2026 -- Present}
+\entryone{Academic Excellence Grant, Texas A\&M University}{2025 -- 2027}
+\entryone{Travel Grants}{}
+\begin{itemize}
+  \item Doosan Corporation, Consumer Electronics Show (CES), 2026
+  \item Texas A\&M University, NeurIPS, 2025
+  \item Samsung Life Insurance and LG Uplus, internship travel, 2024
+  \item Hyundai Mobis, Consumer Electronics Show (CES), 2024
+\end{itemize}
+\entryone{Barry Thomas Scholarship, University of Bristol}{2018}
+\entryone{Future Prize Winner Scholarship, University of Bristol}{2017}
+
+% ---------------- Skills ----------------
+\section{Skills}
+\begin{tabularx}{\textwidth}{@{}p{7.5em}X@{}}
+  \textbf{Languages} & Python, Java, C/C++, SQL \\
+  \textbf{Frameworks} & PyTorch, OpenCV, Google BigQuery \\
+  \textbf{Areas} & Deep learning, computational neuroscience, reinforcement learning, NLP and LLMs, retrieval-augmented generation, evolutionary and meta-heuristic optimization \\
+\end{tabularx}
+
+\end{document}
