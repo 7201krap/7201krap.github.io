@@ -84,6 +84,19 @@ table.cv td:first-child {
   margin-top: 24px;
 }
 
+/* header band */
+.hero {
+  margin: 0 -24px 8px;
+  padding: 28px 24px 18px;
+  border-radius: 6px;
+  background: #7a1c2b;
+  color: #fff;
+}
+.hero h1 { color: #fff; }
+.hero .tagline { color: #f0d9dd; }
+.hero a { color: #ffd9de; border-bottom-color: #b3616d; }
+.hero a:hover { border-bottom-color: #fff; }
+
 /* header */
 table.header {
   width: 100%;
@@ -155,6 +168,7 @@ ul.projects li {
   body { font-size: 16px; }
   .page { padding: 24px 16px 40px; }
   .sec { margin: 0 -16px; padding: 18px 16px 10px; border-radius: 0; }
+  .hero { margin: -24px -16px 8px; padding: 24px 16px 16px; border-radius: 0; }
   table.header,
   table.header tr,
   table.header td { display: block; width: 100%; }
