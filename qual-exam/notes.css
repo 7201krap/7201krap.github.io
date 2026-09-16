@@ -40,6 +40,7 @@ figure {
   text-align: center;
 }
 figure img {
+  box-sizing: border-box;
   display: block;
   margin: 0 auto;
   max-width: min(100%, 620px);
