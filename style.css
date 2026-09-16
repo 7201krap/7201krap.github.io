@@ -114,12 +114,19 @@ table.cv td:first-child {
 }
 
 /* publications */
-ol.pubs {
-  padding-left: 24px;
-  margin: 0 0 8px;
+table.pubs {
+  border-collapse: collapse;
+  width: 100%;
 }
-ol.pubs li {
-  margin-bottom: 12px;
+table.pubs td {
+  vertical-align: top;
+  padding: 0 0 12px;
+}
+table.pubs td:first-child {
+  width: 44px;
+  padding-right: 10px;
+  color: #7a1c2b;
+  white-space: nowrap;
 }
 
 /* projects */
