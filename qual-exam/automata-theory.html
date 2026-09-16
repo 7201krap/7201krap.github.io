@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automata Theory – Ph.D. Qualifier Exam</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="notes.css">
+</head>
+<body>
+<div class="page">
+
+<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Ph.D. Qualifier Exam</a> / Automata theory</p>
+
+<h1>Automata theory (theory of computation)</h1>
+
+<h2>Closure properties</h2>
+<ul>
+<li><b>Regular languages</b> are closed under union, intersection, concatenation, star, and complement.</li>
+<li><b>Context-free languages</b> are closed under union, concatenation, and star, but <em>not</em> under intersection or complement.</li>
+<li><b>Decidable languages</b> are closed under union, intersection, concatenation, star, and complement.</li>
+<li><b>Recognizable languages</b> are closed under union, intersection, concatenation, and star, but <em>not</em> under complement.</li>
+</ul>
+
+<h2>Decidability</h2>
+<ul>
+<li>All finite languages are decidable.</li>
+<li>Only an infinite language can be undecidable.</li>
+<li>Many infinite languages are decidable (Σ* is infinite but decidable).</li>
+</ul>
+
+<h2>Some facts</h2>
+<ul>
+<li>Every finite language is regular.</li>
+<li>Every subset of a countable set is either countable or finite.</li>
+</ul>
+
+<h2>Decidable vs. recognizable languages</h2>
+<ul>
+<li>A <b>decidable</b> language is also called a <b>recursive</b> language. A Turing machine for it always halts: it accepts and halts if the string is in the language, and rejects (halts) if it is not.</li>
+<li>A <b>recognizable</b> language is also called a <b>recursively enumerable</b> language. A Turing machine for it sometimes halts and sometimes may not. It accepts and halts if the string is in the language; if the string is not in the language, it either rejects (halts) or runs forever.</li>
+</ul>
+
+<p class="topics">
+<a href="index.html">Overview</a> ·
+<a href="useful-materials.html">Useful materials</a> ·
+<a href="sample-questions.html">Sample questions</a> ·
+<a href="algorithms.html">Algorithms</a> ·
+<a href="computer-architecture.html">Architecture</a> ·
+<a href="operating-system.html">OS</a> ·
+<a href="networking.html">Networking</a> ·
+<a href="database.html">Databases</a> ·
+<a href="ai-ml-basics.html">AI / ML</a> ·
+<a href="things-to-remember.html">Things to remember</a>
+</p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+/* Styles specific to the qualifier-exam notes. Loaded after ../style.css. */
+
+.crumbs {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 20px;
+}
+.crumbs a { border-bottom: none; }
+.crumbs a:hover { border-bottom: 1px solid #7a1c2b; }
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+.subtitle {
+  color: #555;
+  margin-bottom: 24px;
+}
+
+h2 {
+  font-size: 20px;
+  margin: 32px 0 10px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e5e5e5;
+}
+h3 {
+  font-size: 17px;
+  margin: 18px 0 6px;
+}
+
+ul, ol {
+  padding-left: 22px;
+  margin: 0 0 12px;
+}
+li { margin-bottom: 4px; }
+li ul, li ol { margin: 4px 0 4px; }
+
+figure {
+  margin: 12px 0 18px;
+}
+figure img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+}
+figcaption {
+  font-size: 14px;
+  color: #555;
+  margin-top: 4px;
+}
+
+code {
+  font-family: Menlo, Consolas, monospace;
+  font-size: 15px;
+  background: #f4f4f4;
+  padding: 0 4px;
+}
+
+table.notes {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 8px 0 16px;
+  font-size: 16px;
+}
+table.notes th, table.notes td {
+  border: 1px solid #ddd;
+  padding: 5px 8px;
+  vertical-align: top;
+  text-align: left;
+}
+table.notes th { background: #f6f6f6; font-weight: bold; }
+
+.answer { margin: 4px 0 14px; }
+.answer b { color: #7a1c2b; }
+
+.topics {
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 1px solid #ddd;
+  font-size: 15px;
+  color: #555;
+}
+.topics a { border-bottom: none; }
+.topics a:hover { border-bottom: 1px solid #7a1c2b; }

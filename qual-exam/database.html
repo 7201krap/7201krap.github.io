@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Databases – Ph.D. Qualifier Exam</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="notes.css">
+</head>
+<body>
+<div class="page">
+
+<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Ph.D. Qualifier Exam</a> / Databases</p>
+
+<h1>Databases</h1>
+
+<h2>Primary key vs. foreign key</h2>
+<table class="notes">
+<tr><th>Orders</th><th>Customers</th></tr>
+<tr>
+<td>Order_ID (PK, primary key)<br>Customer_ID (FK, foreign key)<br>Product</td>
+<td>Customer_ID (PK, primary key)<br>Name<br>Address</td>
+</tr>
+</table>
+
+<h2>Transaction log</h2>
+<p>Also known as the database log or binary log.</p>
+<ul>
+<li>It stores a record of all data changes made to the database.</li>
+<li>It guarantees the ACID properties of the database.</li>
+<li>ACID is the set of properties that guarantee a database transaction is executed safely:
+  <ul>
+  <li><b>Atomicity:</b> the operations in a transaction are never partially executed and then interrupted; either all of them happen or none of them do.</li>
+  <li><b>Consistency:</b> data can only be modified in ways allowed by predefined rules.</li>
+  <li><b>Isolation:</b> other transactions cannot interfere with a transaction while it runs.</li>
+  <li><b>Durability:</b> a successfully committed transaction is permanently reflected in the database.</li>
+  </ul>
+</li>
+</ul>
+
+<h2>ER (entity–relationship) model</h2>
+<ul>
+<li>(To be added.)</li>
+</ul>
+
+<h2>NoSQL</h2>
+<ul>
+<li>Not a relational database; relationships between tables are not defined.</li>
+<li>Data is represented as (key, value) pairs and only input/output by key is supported. No JOIN is needed. Handles very large volumes of data. No schema. Downside: data updates are slow.</li>
+</ul>
+
+<h2>Normalization</h2>
+<ul>
+<li>Normalization is the process of deciding the structure of the data during relational database design so as to minimize data redundancy.</li>
+<li>Typically, large and poorly organized tables are broken into smaller, well-organized tables.</li>
+</ul>
+
+<h2>Clustered vs. non-clustered index</h2>
+<ul>
+<li><b>Clustered index</b>
+  <ul>
+  <li>Defines the order in which data is physically stored in the table.</li>
+  <li>Example: a dictionary.</li>
+  </ul>
+</li>
+<li><b>Non-clustered index</b>
+  <ul>
+  <li>Stored in one place while the table data is stored in another.</li>
+  <li>Example: the index at the back of a book.</li>
+  </ul>
+</li>
+<li>Some facts:
+  <ul>
+  <li>A table can have only one clustered index.</li>
+  <li>A table can have multiple non-clustered indexes.</li>
+  <li>A clustered index is faster than a non-clustered index.</li>
+  </ul>
+</li>
+</ul>
+
+<h2>Normal forms</h2>
+<ul>
+<li><b>1NF:</b> a relation is in first normal form if the domain of every attribute consists of atomic values only.</li>
+<li><b>2NF:</b> a relation is in second normal form if it is in 1NF and has no partial dependencies, i.e. no non-key attribute depends on only part of the primary key. A partial dependency is a dependency on only one of the keys of a composite primary key; without a composite primary key there is no partial dependency. In practice, columns unrelated to the core subject of the table are moved out.</li>
+<li><b>3NF:</b> a relation is in third normal form if every non-key attribute is functionally dependent on the primary key only. Columns that depend on an ordinary (non-key) column are moved to a separate table.</li>
+</ul>
+
+<p class="topics">
+<a href="index.html">Overview</a> ·
+<a href="useful-materials.html">Useful materials</a> ·
+<a href="sample-questions.html">Sample questions</a> ·
+<a href="algorithms.html">Algorithms</a> ·
+<a href="computer-architecture.html">Architecture</a> ·
+<a href="operating-system.html">OS</a> ·
+<a href="networking.html">Networking</a> ·
+<a href="automata-theory.html">Automata</a> ·
+<a href="ai-ml-basics.html">AI / ML</a> ·
+<a href="things-to-remember.html">Things to remember</a>
+</p>
+
+</div>
+</body>
+</html>

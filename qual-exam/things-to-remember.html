@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Things to Remember – Ph.D. Qualifier Exam</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="notes.css">
+</head>
+<body>
+<div class="page">
+
+<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Ph.D. Qualifier Exam</a> / Things to remember</p>
+
+<h1>Things to remember</h1>
+
+<h2>Compiler vs. interpreter</h2>
+<table class="notes">
+<tr><th>Compiler</th><th>Interpreter</th></tr>
+<tr><td>Translates the entire source code in a single run</td><td>Translates the code line by line</td></tr>
+<tr><td>Compilation happens before execution</td><td>Translation and execution happen at the same time</td></tr>
+<tr><td>High memory usage</td><td>Low memory usage</td></tr>
+<tr><td>Reports all errors at once</td><td>Reports errors one line at a time</td></tr>
+<tr><td>Example: C / C++</td><td>Example: Python</td></tr>
+</table>
+
+<h2>Instance method vs. static method</h2>
+<ul>
+<li>A static method is a method declared with the <code>static</code> keyword. It can be called without creating an object.</li>
+<li>A static method belongs to the class, while an instance method belongs to an instance of the class.</li>
+<li>An instance method can access instance methods and variables.</li>
+<li>An instance method can access static methods and variables.</li>
+<li>A static method can access static methods and variables.</li>
+<li>A static method cannot access instance methods and variables.</li>
+</ul>
+
+<h2>Call stack</h2>
+<ul>
+<li>A dynamic data structure maintained in RAM by the OS.</li>
+<li>Its purpose is to control the way procedures and functions call each other and pass parameters to each other.</li>
+<li>Local variables on the call stack are part of the root set in garbage collection.</li>
+</ul>
+
+<h2>Procedure call</h2>
+<ul>
+<li>Things that always happen on a procedure call:
+  <ul>
+  <li>The program counter is updated.</li>
+  <li>The stack pointer is updated (the return address is saved on the stack).</li>
+  </ul>
+</li>
+<li><b>Stack pointer register:</b> to push data onto or pop data from the stack, the machine must remember how far the stack currently extends. When the called function returns, the stack pointer is moved back by one stack frame.</li>
+</ul>
+
+<h2>Stack frame</h2>
+<ul>
+<li>A stack frame is a frame of data that gets pushed onto the stack. In the case of the call stack, a stack frame represents a function call and its argument data.</li>
+<li>The function's return address is pushed first, then the arguments and space for local variables. Together they make the frame.</li>
+<li>The stack region of memory holds the local variables and parameters associated with function calls.</li>
+<li>The stack region is allocated when a function is called and released when the call completes.</li>
+<li>When a function is called, its parameters, its local variables, and the return address are stored on the stack.</li>
+</ul>
+
+<h2>Functional completeness</h2>
+<ul>
+<li>{NOT, AND}</li>
+<li>{NOT, OR}</li>
+<li>{XOR, AND}</li>
+<li>{XOR, OR}</li>
+</ul>
+
+<h2>Sequential vs. combinational circuits</h2>
+<ul>
+<li><b>Sequential circuit:</b> e.g. a counter (flip-flops with gates); stores memory or state.</li>
+<li><b>Combinational circuit:</b> arithmetic and logic operations, or direct control.</li>
+<li><b>Decoder:</b> takes an n-bit address and activates one of 2<sup>n</sup> individual output lines. It turns one input into many outputs, i.e. it sends data to the appropriate output line.</li>
+<li><b>Multiplexer:</b> selects one of 2<sup>n</sup> input lines and connects it to the output line. It outputs one of several inputs.</li>
+</ul>
+
+<h2>DMA (direct memory access)</h2>
+<ul>
+<li>DMA lets an I/O device send data to or receive data from main memory directly, bypassing the CPU, to speed up memory operations.</li>
+</ul>
+
+<h2>Distributed systems</h2>
+<ul>
+<li>A collection of independent computers that appears to its users as a single system.</li>
+<li>Why do we need distributed systems? (1) Limited resources, (2) tolerance to failures, (3) convenient access to resources.</li>
+</ul>
+
+<h2>Symmetric difference</h2>
+<figure>
+<img src="img/things-to-remember-1.png" alt="Venn diagram with the symmetric difference of two sets shaded">
+<figcaption>The symmetric difference of two sets (shaded). Source: <a href="https://en.wikipedia.org/wiki/Symmetric_difference">Wikipedia</a></figcaption>
+</figure>
+
+<h2>Static (lexical) scoping vs. dynamic scoping</h2>
+<ul>
+<li><b>Static (lexical) scoping:</b> a variable or function is resolved using the context of where it is defined.</li>
+<li><b>Dynamic scoping:</b> a variable or function is resolved using the context of where it is called. Follow the chain of calls and use the variable defined there; if something was defined earlier, it is simply overwritten.</li>
+</ul>
+
+<h2>Direct vs. indirect representation</h2>
+<ul>
+<li><b>Direct representation</b> (stack storage): accessing a component is fast.</li>
+<li><b>Indirect representation</b> (heap storage): compilation is fast.</li>
+<li>When the storage size of some private component of a variable changes, indirect representation minimizes the number of source modules that must be recompiled.</li>
+</ul>
+
+<h2>Ripple-carry adder</h2>
+<ul>
+<li>Computation time for k bits: T<sub>c</sub> × (k − 1) + T<sub>s</sub>
+  <ul>
+  <li>T<sub>c</sub>: carry output delay</li>
+  <li>T<sub>s</sub>: sum output delay</li>
+  </ul>
+</li>
+</ul>
+
+<h2>Semi-space copying collection</h2>
+<ul>
+<li>Assume a "from" space and a "to" space.</li>
+<li>Discard everything dead in the "from" space and copy only the live objects to the "to" space.</li>
+</ul>
+<figure>
+<img src="img/things-to-remember-2.png" alt="Slide illustrating semi-space copying: reachable objects are copied compactly into the second semi-space">
+<figcaption>Source: <a href="https://www.infoq.com/presentations/terminology-garbage-collector/">InfoQ, garbage collector terminology</a></figcaption>
+</figure>
+
+<h2>Church–Turing thesis</h2>
+<p>Also called Church's thesis, Church's conjecture, or Turing's thesis.</p>
+<ul>
+<li>The thesis says that every computation that can be carried out by mechanical means can be carried out by some Turing machine.</li>
+<li>Every effective computation or algorithm can be executed on a Turing machine.</li>
+<li>The thesis does not have the form of a theorem and cannot be proved.</li>
+</ul>
+
+<h2>Master theorem</h2>
+<ul>
+<li>The master theorem is a quick and simple way to compute the time complexity of recurrence relations (divide-and-conquer algorithms).</li>
+</ul>
+
+<h2>Raymond's tree-based algorithm</h2>
+<ul>
+<li>Raymond's tree-based algorithm guarantees freedom from deadlock, but starvation may occur.</li>
+</ul>
+
+<h2>Four principles of object-oriented programming</h2>
+<ul>
+<li><b>Encapsulation:</b> bundling data and behavior into a class.</li>
+<li><b>Inheritance.</b></li>
+<li><b>Abstraction:</b> defining common attributes and behavior reduces code duplication, sets up relationships between classes effectively, and makes maintenance easier.</li>
+<li><b>Polymorphism:</b> e.g. overloading.</li>
+</ul>
+
+<h2>Quantifiers</h2>
+<ul>
+<li>(∀x P(x)) ∨ (∀x Q(x)) → ∀x (P(x) ∨ Q(x)). The reverse direction does not hold: you can combine, but you cannot split.</li>
+<li>(∃x P(x)) ∨ (∃x Q(x)) → ∃x (P(x) ∨ Q(x)). Again the reverse direction does not hold.</li>
+</ul>
+
+<h2>1's complement vs. 2's complement</h2>
+<ul>
+<li><b>1's complement</b>
+  <ul>
+  <li>Method: invert every bit.</li>
+  <li>For example, the 1's complement of 0011 is 1100.</li>
+  </ul>
+</li>
+<li><b>2's complement</b>
+  <ul>
+  <li>Method: invert every bit, then add 1 at the LSB.</li>
+  <li>The most significant bit (MSB) is used as the sign bit: 0 means positive, 1 means negative.</li>
+  <li>For example, the 2's complement of 0010 (decimal 2) is found as follows: 0010 → invert → 1101 → add 1 at the LSB → 1110 (decimal −2).</li>
+  <li>0010 + 1110 = 10000; the leading 1 is discarded because there were only 4 bits to begin with.</li>
+  </ul>
+</li>
+</ul>
+
+<h2>Logic</h2>
+<ul>
+<li><b>Tautology:</b> always true.</li>
+<li><b>Contradiction:</b> always false.</li>
+<li><b>Contingency:</b> sometimes true, sometimes false. A proposition that is neither true under every valuation (a tautology) nor false under every valuation (a contradiction).</li>
+<li><b>Satisfiability:</b> at least one valuation makes it true.</li>
+</ul>
+
+<h2>Static allocation vs. stack allocation</h2>
+<ul>
+<li>Static allocation cannot create data structures dynamically (no recursive procedures).</li>
+<li>Stack allocation creates data structures and objects dynamically (recursive procedures are possible).</li>
+</ul>
+
+<h2>Garbage collection</h2>
+<ul>
+<li><b>Reference counting</b>
+  <ul>
+  <li>A smart pointer maintains a reference count internally and frees the object's memory when the count reaches 0.</li>
+  <li>Objects whose reference count is 0 can be considered no longer in use and become candidates for garbage collection.</li>
+  <li>Objects in a cycle that is unreachable from the GC roots are also candidates for collection.</li>
+  <li>Downsides: tracking the reference counts adds overhead, and cyclic references can cause memory leaks.</li>
+  </ul>
+</li>
+<li><b>Mark and sweep</b>
+  <ul>
+  <li>Starting from the GC roots, identify the reachable objects; clean up the unreachable ones so that their memory can be reused.</li>
+  <li><b>Mark:</b> starting from the GC roots, identify and record every reachable object.</li>
+  <li><b>Sweep:</b> free the memory of the objects not identified in the mark phase, i.e. the unreachable ones, so it can be reused.</li>
+  <li>It suffers from memory fragmentation.</li>
+  </ul>
+</li>
+<li><b>Stop the world</b>
+  <ul>
+  <li>When garbage collection runs, the application threads must pause, because live objects can only be identified accurately while the application threads are stopped.</li>
+  <li>This pausing of application threads is called "stop the world".</li>
+  </ul>
+</li>
+</ul>
+
+<p class="topics">
+<a href="index.html">Overview</a> ·
+<a href="useful-materials.html">Useful materials</a> ·
+<a href="sample-questions.html">Sample questions</a> ·
+<a href="algorithms.html">Algorithms</a> ·
+<a href="computer-architecture.html">Architecture</a> ·
+<a href="operating-system.html">OS</a> ·
+<a href="networking.html">Networking</a> ·
+<a href="database.html">Databases</a> ·
+<a href="automata-theory.html">Automata</a> ·
+<a href="ai-ml-basics.html">AI / ML</a>
+</p>
+
+</div>
+</body>
+</html>

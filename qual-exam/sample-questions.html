@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample Questions – Ph.D. Qualifier Exam</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="notes.css">
+</head>
+<body>
+<div class="page">
+
+<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Ph.D. Qualifier Exam</a> / Sample questions</p>
+
+<h1>Sample questions</h1>
+<p class="subtitle">Questions in the style of the exam, with short answers.</p>
+
+<ol>
+
+<li>Which of the following in-place sorting algorithms needs the minimum number of swaps?
+<ol type="1"><li>Insertion sort</li><li>Quick sort</li><li>Heap sort</li><li>Selection sort</li></ol>
+<p class="answer"><b>Answer:</b> (4) Selection sort. Selection sort is an in-place algorithm with the minimum number of swaps.</p>
+</li>
+
+<li>A cache has an access time of 30 ns and main memory has an access time of 150 ns. What is the average access time of the CPU, assuming a hit ratio of 80%?
+<p class="answer"><b>Answer:</b> 60 ns. (30 × 0.8) + ((30 + 150) × 0.2) = 60.</p>
+</li>
+
+<li>What is the minimum number of two-input NAND gates needed to implement a two-input OR gate?
+<p class="answer"><b>Answer:</b> 3 NAND gates.</p>
+</li>
+
+<li>At low multiprogramming levels, throughput increases as the multiprogramming level increases. This is best explained by the fact that, as the multiprogramming level increases,
+<p class="answer"><b>Answer:</b> the potential for concurrent activity among system resources increases.</p>
+</li>
+
+<li>At intermediate multiprogramming levels, the rate of increase of throughput with the multiprogramming level decreases. This is best explained by the fact that, as the multiprogramming level increases,
+<p class="answer"><b>Answer:</b> some system resource begins to saturate (becomes 100% utilized).</p>
+</li>
+
+<li>Let A and B be two sets of words (strings) over Σ*, for some alphabet Σ. Suppose B is a subset of A. Which of the following must always be true?
+<ol type="I"><li>If A is finite, then B is finite.</li><li>If A is regular, then B is regular.</li><li>If A is context-free, then B is context-free.</li></ol>
+<p class="answer"><b>Answer:</b> I is true; II and III are false.</p>
+</li>
+
+<li>Two processors, M-5 and M-7, implement the same instruction set. M-5 uses a 5-stage pipeline and a clock cycle of 10 ns. M-7 uses a 7-stage pipeline and a clock cycle of 7.5 ns. Which of the following is (are) true?
+<ol type="I"><li>M-7's pipeline has better maximum throughput than M-5's pipeline.</li><li>The latency of a single instruction is shorter on M-7's pipeline than on M-5's.</li><li>Programs executing on M-7 will always run faster than programs executing on M-5.</li></ol>
+<p class="answer"><b>Answer:</b> I is true; II and III are false.<br>
+I: throughput depends only on the clock cycle. II: latency is (number of stages) × (longest stage time), so M-5's latency is 5 × (longest stage) and M-7's is 7 × (longest stage). III: obviously false.</p>
+</li>
+
+<li>An aid to determining whether deadlock has occurred is:
+<p class="answer"><b>Answer:</b> a resource allocation graph.</p>
+</li>
+
+<li>Which of the following is (are) true about virtual memory systems that use pages?
+<ol type="I"><li>The virtual address space can be larger than the amount of physical memory.</li><li>Programs must be resident in main memory throughout their execution.</li><li>Pages correspond to semantic characteristics of the program.</li></ol>
+<p class="answer"><b>Answer:</b> I is true; II and III are false.</p>
+</li>
+
+<li>Which of the following is an efficient method of cache updating?
+<ol type="1"><li>Snoopy writes</li><li>Write through</li><li>Write within</li><li>Buffered write</li></ol>
+<p class="answer"><b>Answer:</b> (1). The ability of cache controllers to observe activity on the bus and take appropriate action is called the snoopy-cache technique. For performance reasons it is important that snooping does not interfere with the normal operation of a processor and its cache.</p>
+</li>
+
+<li>Increasing the number of buffers is likely to do which of the following?
+<ol type="I"><li>Increase the rate at which requests are satisfied (throughput).</li><li>Change the likelihood of deadlock.</li><li>Change the ease of achieving a correct implementation.</li></ol>
+<p class="answer"><b>Answer:</b> I is true; II and III are false.</p>
+</li>
+
+<li>How many page faults can a single load word (<code>lw</code>) instruction cause, if page tables are not locked in memory and may be swapped to disk?
+<p class="answer"><b>Answer:</b> at most 2 per phase. In the worst case the page table itself is not in memory, so bringing it in causes one page fault. The page containing the word may then also be absent, causing a second page fault. This can happen in both the fetch and the execute phase.</p>
+</li>
+
+<li>If L1 is a decidable language and L2 is an undecidable language, then L1 ∪ L2 is
+<p class="answer"><b>Answer:</b> infinite, but possibly decidable and possibly undecidable. A decidable language can be finite or infinite; an undecidable language is always infinite.</p>
+</li>
+
+<li>Let G = (V, E) be a connected, undirected graph, and let a and b be two distinct vertices in V. Let P1 be the problem of finding a shortest path between a and b, and P2 the problem of finding a longest simple path between a and b.
+<p class="answer"><b>Answer:</b> P1 can be solved in polynomial time, but P2 is not known to be solvable in polynomial time (it is NP-complete). The exception is a DAG: the longest path in a DAG can be found in linear time.</p>
+</li>
+
+<li>One garbage collection algorithm is semispace copying collection. Which of the following characteristics apply to it?
+<ol type="I"><li>Collects dead objects that reference each other.</li><li>Incurs overhead on every assignment to a reference variable.</li><li>Avoids fragmentation.</li></ol>
+<p class="answer"><b>Answer:</b> I and III are true; II is false.</p>
+</li>
+
+<li>Of the following problems on a given undirected graph G, which is currently known to be solvable in polynomial time?
+<ol type="1"><li>Finding the longest simple cycle in G</li><li>Finding the shortest cycle in G</li><li>Finding all spanning trees of G</li><li>Finding the largest clique in G</li><li>Finding a node coloring of G (adjacent nodes receive distinct colors) with the minimum number of colors</li></ol>
+<p class="answer"><b>Answer:</b> (2).</p>
+</li>
+
+<li>True or false?
+<ul>
+<li>Finding the shortest cycle in an undirected graph G is solvable in polynomial time. <b>True.</b></li>
+<li>The purpose of a compiler is to translate source code into machine code. <b>True.</b></li>
+<li>Every finite language is decidable. <b>True.</b></li>
+<li>The halting problem is undecidable. <b>True.</b></li>
+</ul>
+</li>
+
+</ol>
+
+<p class="topics">
+<a href="index.html">Overview</a> ·
+<a href="useful-materials.html">Useful materials</a> ·
+<a href="algorithms.html">Algorithms</a> ·
+<a href="computer-architecture.html">Architecture</a> ·
+<a href="operating-system.html">OS</a> ·
+<a href="networking.html">Networking</a> ·
+<a href="database.html">Databases</a> ·
+<a href="automata-theory.html">Automata</a> ·
+<a href="ai-ml-basics.html">AI / ML</a> ·
+<a href="things-to-remember.html">Things to remember</a>
+</p>
+
+</div>
+</body>
+</html>

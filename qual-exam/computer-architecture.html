@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Computer Architecture – Ph.D. Qualifier Exam</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="notes.css">
+</head>
+<body>
+<div class="page">
+
+<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Ph.D. Qualifier Exam</a> / Computer architecture</p>
+
+<h1>Computer architecture</h1>
+
+<h2>Cache coherence protocols</h2>
+<ul>
+<li><b>Definition</b>
+  <ul>
+  <li>Cache coherence concerns the situation where multiple processor cores share the same memory hierarchy but have their own L1 data and instruction caches. Incorrect execution can occur if two or more copies of a cache block exist in different processors' caches and one of them is modified (<a href="https://www.sciencedirect.com/topics/engineering/cache-coherence">ScienceDirect</a>).</li>
+  <li>In short, it is the problem of keeping the data in the caches consistent (<a href="https://www.ques10.com/p/13222/what-is-cache-coherence-problem-and-how-it-can-be-/">ques10</a>).</li>
+  </ul>
+</li>
+<li><b>Solution 1: snooping-based protocol</b>
+  <ul>
+  <li>Broadcast messages are used and the caches are connected through a bus.</li>
+  <li>Each cache constantly monitors the address bus for accesses to memory it holds. When a write occurs in another cache, the cache controller invalidates its own copies of that block.</li>
+  </ul>
+</li>
+<li><b>Solution 2: directory-based protocol</b>
+  <ul>
+  <li>A directory records which nodes hold copies of each cache block, so requests are sent only to those nodes. No broadcast is needed, so relatively little bandwidth is required.</li>
+  </ul>
+</li>
+</ul>
+
+<h2>Copy-on-write vs. read-write</h2>
+<ul>
+<li><b>Copy-on-write:</b> a new copy of the data is created only when the original data is actually modified. Until then, the process continues to read from the original.</li>
+<li><b>Read-write</b> has no such mechanism: reads and writes are performed directly, as the name says.</li>
+<li>The difference: copy-on-write is used when the contents will be changed; if the data is simply being copied, read-write is used.</li>
+</ul>
+<figure>
+<img src="img/computer-architecture-1.png" alt="Two processes sharing three pages in memory before process P modifies page 3">
+<img src="img/computer-architecture-2.png" alt="After process P modifies page 3, a private copy of page 3 is created for P">
+<figcaption>Copy-on-write. Source: <a href="https://www.geeksforgeeks.org/copy-on-write/">GeeksforGeeks</a></figcaption>
+</figure>
+
+<h2>Pipelining (5-stage pipeline)</h2>
+<ul>
+<li>An instruction is executed in the order IF, ID, EX, MEM, WB.</li>
+<li><b>IF</b>, instruction fetch: fetch the instruction from memory.</li>
+<li><b>ID</b>, instruction decode: read and decode the instruction; read the registers.</li>
+<li><b>EX</b>, execute: perform the operation.</li>
+<li><b>MEM</b>, memory access: access memory.</li>
+<li><b>WB</b>, write back: write the result to a register.</li>
+</ul>
+
+<h2>Single-cycle vs. multi-cycle implementation</h2>
+<ul>
+<li><b>Single-cycle implementation:</b> all five stages of one instruction are executed within one clock cycle.</li>
+<li><b>Multi-cycle implementation:</b> operations can be pipelined. The cycle needs to be long enough for the slowest functional unit (one of IF, ID, EX, MEM, WB) to settle. For example, if memory takes M ns, the register file R ns, and the ALU A ns, then the cycle cannot be shorter than max(M, R, A).</li>
+</ul>
+<figure>
+<img src="img/computer-architecture-3.png" alt="Timing comparison of single-cycle, multiple-cycle, and pipelined implementations">
+<figcaption>Single cycle, multiple cycle, and pipeline. Source: <a href="https://courses.cs.duke.edu/fall98/cps104/lectures/week14-l2/sld033.htm">Duke CPS 104 lecture slides</a></figcaption>
+</figure>
+
+<h2>Cycles per instruction (CPI)</h2>
+<ul>
+<li>The average number of clock cycles per instruction executed.</li>
+<li>CPI = Σ (frequency of the instruction) × (number of cycles of the instruction).</li>
+</ul>
+<figure>
+<img src="img/computer-architecture-4.png" alt="Worked example: CPI computed from an instruction mix of ALU ops, loads, stores, and branches equals 1.9">
+<figcaption>Worked example of a CPI calculation.</figcaption>
+</figure>
+
+<h2>Subroutine</h2>
+<ul>
+<li>A sequence of program instructions that performs a specific task.</li>
+</ul>
+
+<h2>Stack-organized computer</h2>
+<ul>
+<li>A stack-organized computer is characterized by zero-address instructions.</li>
+</ul>
+
+<h2>Write-through vs. write-back</h2>
+<ul>
+<li><b>Write-through:</b> updates are written to both the cache and main memory.</li>
+<li><b>Write-back:</b> updates are written only to the cache, not to main memory. Data stays in the cache temporarily, and is written to main or secondary memory in block units only when the block is evicted from the cache.</li>
+</ul>
+
+<h2>Memory-mapped I/O</h2>
+<ul>
+<li>I/O ports are placed at addresses on the bus and are accessed just like other memory locations.</li>
+</ul>
+
+<h2>RISC vs. CISC</h2>
+<table class="notes">
+<tr><th>RISC</th><th>CISC</th></tr>
+<tr><td>More registers</td><td>Fewer registers</td></tr>
+<tr><td>Fixed-size instructions</td><td>Variable-size instructions</td></tr>
+<tr><td>An instruction executes in a single clock cycle</td><td>An instruction takes more than one clock cycle</td></tr>
+<tr><td>Code size is large</td><td>Code size is small</td></tr>
+</table>
+<ul>
+<li>Variable-length ISAs allow a smaller code size than fixed-length ISAs. <b>True.</b></li>
+<li>Fixed-length ISAs simplify instruction fetch and decode compared with variable-length ISAs. <b>True.</b></li>
+<li>Variable-length ISAs (CISC) require more registers than fixed-length ISAs (RISC). <b>False.</b> RISC requires more registers than CISC.</li>
+</ul>
+
+<h2>Operand forwarding</h2>
+<ul>
+<li>An optimization in pipelined CPUs that limits the performance loss due to pipeline stalls.</li>
+<li>A data hazard can lead to a pipeline stall when the current operation has to wait for the result of an earlier operation that has not yet finished.</li>
+<li>A stall is a cycle in the pipeline without new input; think of it as idle waiting time.</li>
+<li>Operand forwarding is used to minimize data-dependency stalls in the pipeline.</li>
+<li>With operand forwarding, the interface registers between stages hold intermediate outputs, so a dependent instruction can read the value directly from the interface register.</li>
+<li>Forwarding reduces the number of stall cycles in the pipeline.</li>
+</ul>
+
+<p class="topics">
+<a href="index.html">Overview</a> ·
+<a href="useful-materials.html">Useful materials</a> ·
+<a href="sample-questions.html">Sample questions</a> ·
+<a href="algorithms.html">Algorithms</a> ·
+<a href="operating-system.html">OS</a> ·
+<a href="networking.html">Networking</a> ·
+<a href="database.html">Databases</a> ·
+<a href="automata-theory.html">Automata</a> ·
+<a href="ai-ml-basics.html">AI / ML</a> ·
+<a href="things-to-remember.html">Things to remember</a>
+</p>
+
+</div>
+</body>
+</html>

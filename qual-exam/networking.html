@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Networking – Ph.D. Qualifier Exam</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="notes.css">
+</head>
+<body>
+<div class="page">
+
+<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Ph.D. Qualifier Exam</a> / Networking</p>
+
+<h1>Networking</h1>
+
+<h2>OSI model</h2>
+<ul>
+<li><b>Layer 7, Application</b></li>
+<li><b>Layer 6, Presentation.</b> Converts the system-dependent representation of data into an independent form. Data compression and encryption.</li>
+<li><b>Layer 5, Session</b></li>
+<li><b>Layer 4, Transport.</b> Unit: segment (TCP) or datagram (UDP). Controls the reliability of a link through flow control, segmentation and desegmentation, and error control. It keeps track of segments and retransmits those that fail.</li>
+<li><b>Layer 3, Network.</b> Unit: packet. Responsible for packet forwarding, including routing through intermediate routers.</li>
+<li><b>Layer 2, Data link.</b> Unit: frame.</li>
+<li><b>Layer 1, Physical.</b> Unit: bit.</li>
+</ul>
+
+<h2>Client–server vs. peer-to-peer</h2>
+<ul>
+<li>Client–server requires central servers that respond to client requests.</li>
+<li>Peer-to-peer decentralizes resources; data can be located anywhere, on any connected device.</li>
+</ul>
+<figure>
+<img src="img/networking-1.png" alt="Client-server network compared with a peer-to-peer network">
+<figcaption>Source: <a href="https://www.networkstraining.com/peer-to-peer-vs-client-server-network/">networkstraining.com</a></figcaption>
+</figure>
+
+<h2>CSMA/CD</h2>
+<ul>
+<li>Carrier Sense Multiple Access with Collision Detection.</li>
+<li>A network protocol for carrier transmission that operates in the Medium Access Control (MAC) layer.</li>
+<li>It senses (listens to) whether the shared channel is busy and defers transmission until the channel is free.</li>
+</ul>
+
+<h2>TCP timers</h2>
+<p>TCP uses four timers to keep the connection reliable.</p>
+<ul>
+<li><b>Retransmission timer:</b> started every time a segment is sent. If no ACK arrives within the retransmission timeout (RTO), the segment is retransmitted.</li>
+<li><b>Persistent timer:</b> used to avoid a deadlock.</li>
+<li><b>Keep-alive timer:</b> prevents an established connection from sitting idle for a long time.</li>
+<li><b>Time-wait timer:</b> after a TCP connection is closed, data still in flight may arrive. This timer is used to discard duplicated (retransmitted) or delayed packets.</li>
+</ul>
+
+<h2>Ethernet</h2>
+<ul>
+<li>Uses packet switching.</li>
+<li>Packets sent on Ethernet are limited in size.</li>
+<li>Uses the CSMA/CD protocol to transmit messages.</li>
+<li>Uses buses with multiple masters.</li>
+</ul>
+
+<h2>Address Resolution Protocol (ARP)</h2>
+<ul>
+<li>Determines the hardware (MAC) address for a given IP address.</li>
+<li>Translates the logical address assigned in software (IP address) into the actual physical address (MAC address).</li>
+</ul>
+
+<h2>Parity bit</h2>
+<ul>
+<li>A bit added to detect whether an error occurred during transmission.</li>
+<li><b>Even parity:</b> the parity bit is chosen so that the total number of 1s is even.</li>
+<li>Examples (parity bit added at the front):
+  <ul>
+  <li>0000000 → <b>0</b> 0000000</li>
+  <li>1010001 → <b>1</b> 1010001</li>
+  <li>1101001 → <b>0</b> 1101001</li>
+  <li>1111111 → <b>1</b> 1111111</li>
+  </ul>
+</li>
+</ul>
+
+<h2>Datagram (UDP)</h2>
+<ul>
+<li>A datagram may be fragmented during routing.</li>
+<li>Datagrams are reassembled only at the destination.</li>
+</ul>
+
+<h2>Round-trip time (RTT)</h2>
+<ul>
+<li>The time it takes for a packet to make a round trip. The <code>ping</code> command reports the round-trip time of IP packets.</li>
+</ul>
+
+<h2>TCP handshake</h2>
+<ul>
+<li>Before an application using TCP/IP sends data, it establishes a session with the other computer to guarantee correct delivery.</li>
+<li>The correct order of the three-way handshake is SYN, SYN/ACK, ACK.</li>
+</ul>
+
+<p class="topics">
+<a href="index.html">Overview</a> ·
+<a href="useful-materials.html">Useful materials</a> ·
+<a href="sample-questions.html">Sample questions</a> ·
+<a href="algorithms.html">Algorithms</a> ·
+<a href="computer-architecture.html">Architecture</a> ·
+<a href="operating-system.html">OS</a> ·
+<a href="database.html">Databases</a> ·
+<a href="automata-theory.html">Automata</a> ·
+<a href="ai-ml-basics.html">AI / ML</a> ·
+<a href="things-to-remember.html">Things to remember</a>
+</p>
+
+</div>
+</body>
+</html>
