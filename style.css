@@ -89,13 +89,9 @@ table.cv td:first-child {
   margin: 0 -24px 8px;
   padding: 28px 24px 18px;
   border-radius: 6px;
-  background: #7a1c2b;
-  color: #fff;
+  background: #f2ede4;
+  border-top: 4px solid #7a1c2b;
 }
-.hero h1 { color: #fff; }
-.hero .tagline { color: #f0d9dd; }
-.hero a { color: #ffd9de; border-bottom-color: #b3616d; }
-.hero a:hover { border-bottom-color: #fff; }
 
 /* header */
 table.header {
