@@ -49,19 +49,15 @@
 
 <h2>What happens on a procedure call</h2>
 <ul>
-<li>Two things always happen:
-  <ul>
-  <li>The <b>program counter</b> changes to the address of the called procedure.</li>
-  <li>The <b>stack pointer</b> changes, because the return address (where to continue after the call) is pushed onto the stack.</li>
-  </ul>
-</li>
+<li>What always happens: the <b>program counter</b> changes to the address of the called procedure, and the <b>return address</b> (where to continue after the call) is saved somewhere.</li>
+<li>On most machines the return address is pushed onto the stack, so the <b>stack pointer</b> changes as well. On RISC machines such as MIPS, ARM, or RISC-V, the call instruction instead writes the return address into a link register, and a leaf procedure may never touch the stack at all.</li>
 <li>The <b>stack pointer register</b> keeps track of how far the stack currently extends, so that data can be pushed and popped. When a procedure returns, the stack pointer is moved back by one frame.</li>
 </ul>
 
 <h2>Stack frame</h2>
 <ul>
 <li>A stack frame is the block of data pushed onto the call stack for one function call.</li>
-<li>Typically the return address goes on first, then the arguments, then space for the local variables. Together they make up the frame.</li>
+<li>In the usual layout the caller pushes the arguments first, then the call instruction pushes the return address, then the callee saves the caller's frame pointer and reserves space for its local variables. Together they make up the frame. That is why arguments sit at positive offsets from the frame pointer and locals at negative offsets.</li>
 <li>The frame is created when the function is called and discarded when the function returns, which is why local variables do not outlive the call.</li>
 </ul>
 
@@ -70,9 +66,9 @@
 <ul>
 <li>{NOT, AND}</li>
 <li>{NOT, OR}</li>
-<li>{XOR, AND}</li>
-<li>{XOR, OR}</li>
-<li>Also, NAND alone and NOR alone are each complete.</li>
+<li>NAND alone, and NOR alone.</li>
+<li>{XOR, AND, 1} and {XOR, OR, 1}, i.e. XOR with AND or OR <em>plus the constant 1</em>, since NOT x = x ⊕ 1.</li>
+<li>Watch out: {XOR, AND} and {XOR, OR} on their own are <b>not</b> complete. Every one of those gates outputs 0 when all inputs are 0, so any circuit built from them does too, and NOT can never be produced. Exam answer keys that list them as complete are assuming the constant 1 is available.</li>
 </ul>
 
 <h2>Sequential vs. combinational circuits</h2>
@@ -119,7 +115,7 @@
 <h2>Ripple-carry adder</h2>
 <ul>
 <li>k full adders in a row, each waiting for the carry from the one before it. The carry "ripples" along the chain, so the total delay grows linearly with the number of bits.</li>
-<li>Delay for k bits: T<sub>c</sub> × (k − 1) + T<sub>s</sub>, where T<sub>c</sub> is the delay of one carry output and T<sub>s</sub> is the delay of the final sum output.</li>
+<li>Time until the last sum bit is ready: T<sub>c</sub> × (k − 1) + T<sub>s</sub>, where T<sub>c</sub> is the delay of one carry output and T<sub>s</sub> is the delay of a sum output. The final carry-out is ready at k × T<sub>c</sub>. Either way the delay is linear in k, which is why faster adders (carry-lookahead) exist.</li>
 </ul>
 
 <h2>Semi-space copying collection</h2>
@@ -148,7 +144,7 @@
 <h2>Raymond's tree-based algorithm</h2>
 <ul>
 <li>A token-based mutual exclusion algorithm for distributed systems: the processes are arranged in a tree and requests for the token travel toward whoever holds it.</li>
-<li>It guarantees freedom from deadlock, but starvation is possible: a process can keep being passed over.</li>
+<li>It guarantees freedom from both deadlock and starvation: each node keeps a FIFO queue of requests, so every request is eventually served. What it does <em>not</em> guarantee is fairness in the sense of serving requests in the global order they were issued.</li>
 </ul>
 
 <h2>The four principles of object-oriented programming</h2>

@@ -20,9 +20,9 @@
 <p>Seven layers, from the application down to the wire. Each layer has its own name for the unit of data it handles.</p>
 <table class="notes">
 <tr><th>Layer</th><th>Unit</th><th>What it does</th></tr>
-<tr><td>7. Application</td><td></td><td>The protocols programs use directly: HTTP, SMTP, DNS, and so on.</td></tr>
-<tr><td>6. Presentation</td><td></td><td>Converts data from the sender's system-specific representation into a common form. Compression and encryption happen here.</td></tr>
-<tr><td>5. Session</td><td></td><td>Opens, manages, and closes sessions between applications.</td></tr>
+<tr><td>7. Application</td><td>Data (message)</td><td>The protocols programs use directly: HTTP, SMTP, DNS, and so on.</td></tr>
+<tr><td>6. Presentation</td><td>Data</td><td>Converts data from the sender's system-specific representation into a common form. Compression and encryption happen here.</td></tr>
+<tr><td>5. Session</td><td>Data</td><td>Opens, manages, and closes sessions between applications.</td></tr>
 <tr><td>4. Transport</td><td>Segment (TCP), datagram (UDP)</td><td>End-to-end reliability: flow control, splitting data into segments and reassembling it, error control. TCP keeps track of segments and retransmits any that are lost.</td></tr>
 <tr><td>3. Network</td><td>Packet</td><td>Forwards packets toward their destination, including routing through intermediate routers. IP lives here.</td></tr>
 <tr><td>2. Data link</td><td>Frame</td><td>Delivers frames between directly connected nodes. Ethernet and MAC addresses live here.</td></tr>
@@ -43,7 +43,8 @@
 <ul>
 <li>Carrier Sense Multiple Access with Collision Detection. It is the medium-access (MAC-layer) protocol used by classic shared Ethernet.</li>
 <li><b>Carrier sense:</b> before sending, a station listens to the shared channel and waits until it is free.</li>
-<li><b>Collision detection:</b> if two stations start at the same time and their signals collide, both stop, wait a random amount of time, and try again.</li>
+<li><b>Collision detection:</b> a station keeps listening <em>while</em> it transmits. If two stations start within one propagation delay of each other, their signals collide; each one aborts as soon as it notices, sends a short jam signal, and waits a random time before retrying.</li>
+<li>The random wait uses <b>binary exponential backoff</b>: after the k-th collision the station picks a wait from 0 to 2<sup>k</sup> − 1 slot times (capped at 10 doublings), and gives up after 16 attempts.</li>
 </ul>
 
 <h2>TCP timers</h2>
@@ -52,7 +53,7 @@
 <li><b>Retransmission timer:</b> started whenever a segment is sent. If the acknowledgment does not arrive before the retransmission timeout (RTO) expires, the segment is sent again.</li>
 <li><b>Persistence timer:</b> prevents a deadlock where the receiver advertised a zero window, later reopened it, but the "window open" message was lost. The sender periodically probes so it does not wait forever.</li>
 <li><b>Keep-alive timer:</b> prevents an established but idle connection from sitting open indefinitely; if nothing is heard for a long time, a probe is sent and the connection is closed if there is no reply.</li>
-<li><b>Time-wait timer:</b> after a connection is closed, delayed or retransmitted packets from it might still arrive. The closing side waits for a while so that those stragglers can be safely discarded instead of confusing a new connection.</li>
+<li><b>Time-wait timer:</b> the side that performs the active close waits 2 × MSL (twice the maximum segment lifetime) before fully closing. This lets it retransmit the final ACK if that ACK was lost, and ensures that delayed or duplicated segments from the old connection die out instead of confusing a new connection on the same ports.</li>
 </ul>
 
 <h2>Ethernet</h2>
@@ -67,6 +68,7 @@
 <ul>
 <li>Finds the hardware (MAC) address that corresponds to a given IP address on the local network.</li>
 <li>IP addresses are logical addresses assigned in software; MAC addresses are the physical addresses burned into the network interface. ARP is the bridge between the two: "who has IP 10.0.0.5? tell me your MAC."</li>
+<li>The ARP request is <b>broadcast</b> (destination MAC ff:ff:ff:ff:ff:ff) so every host on the LAN sees it; only the owner of that IP answers, with a <b>unicast</b> reply. Results are cached in an ARP table for a few minutes.</li>
 </ul>
 
 <h2>Parity bit</h2>
@@ -84,10 +86,10 @@
 <li>Parity catches any odd number of flipped bits, but not an even number.</li>
 </ul>
 
-<h2>Datagrams (UDP)</h2>
+<h2>Datagrams and fragmentation</h2>
 <ul>
-<li>A datagram may be fragmented along the way if it is larger than a link can carry.</li>
-<li>The fragments are reassembled only at the final destination, not by intermediate routers.</li>
+<li>UDP hands each message to IP as a single datagram. It is <b>IP</b> (the network layer), not UDP, that fragments a datagram when it is larger than a link's MTU. In IPv4, routers along the way may fragment; in IPv6 only the sender does.</li>
+<li>The fragments are reassembled only by the IP layer at the final destination host, never by intermediate routers.</li>
 </ul>
 
 <h2>Round-trip time (RTT)</h2>

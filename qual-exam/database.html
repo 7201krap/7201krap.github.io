@@ -31,10 +31,10 @@ customer, so the Orders table stores the customer's ID as a foreign key.
 </table>
 
 <h2>Transaction log</h2>
-<p>Also called the database log or binary log.</p>
+<p>Also called the database log or write-ahead log (WAL).</p>
 <ul>
 <li>It records every change made to the data, in order. If the system crashes halfway through a transaction, the log is what lets the database roll back or redo the work.</li>
-<li>That is what makes the <b>ACID</b> guarantees possible. ACID is the set of properties that make a transaction safe:
+<li>The log is what gives a transaction <em>atomicity</em> and <em>durability</em>. The other two ACID properties come from elsewhere: isolation from the concurrency-control mechanism (locking, timestamps), and consistency from integrity constraints and correct application code. ACID is the set of properties that make a transaction safe:
   <ul>
   <li><b>Atomicity:</b> a transaction is all-or-nothing. It never stops halfway with some of its changes applied.</li>
   <li><b>Consistency:</b> a transaction moves the database from one valid state to another; data can only be changed in ways that respect the defined rules and constraints.</li>
@@ -52,7 +52,7 @@ customer, so the Orders table stores the customer's ID as a foreign key.
 <h2>NoSQL</h2>
 <ul>
 <li>"Not only SQL": databases that are not relational and do not define relationships between tables.</li>
-<li>The simplest kind stores data as (key, value) pairs and supports reads and writes by key only. There are no joins, no fixed schema, and it scales to very large amounts of data. The trade-off is that updating data tends to be slower and you lose the query flexibility of SQL.</li>
+<li>The simplest kind stores data as (key, value) pairs and supports reads and writes by key only. There are no joins, no fixed schema, and it scales to very large amounts of data. The trade-off is weaker consistency guarantees (typically eventual consistency rather than ACID transactions), no joins or ad-hoc queries, and the loss of SQL's query flexibility.</li>
 </ul>
 
 <h2>Normalization</h2>
@@ -89,6 +89,7 @@ customer, so the Orders table stores the customer's ID as a foreign key.
 <li><b>First normal form (1NF):</b> every attribute holds a single atomic value. No lists inside a cell, no repeating groups of columns.</li>
 <li><b>Second normal form (2NF):</b> 1NF plus no <em>partial dependencies</em>. This only matters when the primary key is composite (made of several columns): no non-key column may depend on just part of the key. If a column depends on only one piece of the key, it belongs in its own table. A table with a single-column primary key is automatically in 2NF.</li>
 <li><b>Third normal form (3NF):</b> 2NF plus no <em>transitive dependencies</em>. Every non-key column must depend on the primary key directly, not on some other non-key column. If column C depends on column B, which depends on the key, move B and C into a separate table.</li>
+<li><b>Boyce–Codd normal form (BCNF):</b> for every non-trivial functional dependency X → A, X must be a superkey. It is slightly stricter than 3NF, which also allows the case where A is part of a candidate key.</li>
 </ul>
 
 <p class="topics">

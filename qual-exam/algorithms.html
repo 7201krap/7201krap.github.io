@@ -82,7 +82,7 @@
 
 <h2>Minimum spanning tree (MST)</h2>
 <ul>
-<li>A <b>spanning tree</b> of a connected graph is a subgraph that touches every vertex and has no cycles. With n vertices it always has exactly n − 1 edges.</li>
+<li>A <b>spanning tree</b> of a connected graph is a connected, acyclic subgraph that includes every vertex. With n vertices it always has exactly n − 1 edges.</li>
 <li>The <b>minimum</b> spanning tree is the spanning tree whose edge weights add up to the least. Think of connecting cities with the cheapest possible set of roads.</li>
 <li>It is defined on undirected, weighted graphs. The MST is not necessarily unique (ties in edge weight can give several), but its total weight is.</li>
 <li><b>Generic algorithm:</b> start with an empty edge set A; repeatedly add an edge that is "safe" (keeps A a subset of some MST); stop at n − 1 edges. Kruskal and Prim are two different ways to pick a safe edge.</li>
@@ -128,7 +128,7 @@
 <h2>Optimal substructure</h2>
 <ul>
 <li>A problem has optimal substructure if an optimal solution can be built from optimal solutions to its subproblems. Shortest paths have it; longest simple paths do not.</li>
-<li>Divide and conquer, greedy algorithms, and dynamic programming all depend on it.</li>
+<li>Greedy algorithms and dynamic programming both depend on it. Dynamic programming additionally needs overlapping subproblems; greedy algorithms additionally need the greedy-choice property.</li>
 </ul>
 
 <h2>Recursion</h2>
@@ -181,8 +181,8 @@
 <li>Max-flow algorithms are <b>not greedy</b>: they repeatedly find an augmenting path in the residual graph, and a later path may undo part of an earlier one.</li>
 <li><b>Ford–Fulkerson</b>
   <ul>
-  <li>Finds augmenting paths with DFS.</li>
-  <li>Time: O(E · f), where f is the value of the maximum flow. With badly chosen paths it can be very slow when capacities are large.</li>
+  <li>The general method: repeatedly find any augmenting path (DFS is the usual choice) and push flow along it.</li>
+  <li>Time: O(E · f) when capacities are integers, where f is the value of the maximum flow. With large capacities and badly chosen paths it can be very slow, and with irrational capacities the basic method may not even terminate.</li>
   </ul>
 </li>
 <li><b>Edmonds–Karp</b> (Ford–Fulkerson with a specific rule)
@@ -226,7 +226,7 @@
 
 <h2>Simple graph</h2>
 <ul>
-<li>Also called a strict graph: undirected, unweighted, no self-loops, and at most one edge between any two vertices.</li>
+<li>Also called a strict graph: undirected, no self-loops, and at most one edge between any two vertices. Weights are allowed; "simple" is about the structure, not the weights.</li>
 </ul>
 
 <h2>Loop invariant</h2>
@@ -285,8 +285,9 @@
 
 <h2>Circuit vs. path</h2>
 <ul>
-<li>A <b>circuit</b> (or cycle) starts and ends at the same vertex.</li>
-<li>A <b>path</b> does not have to.</li>
+<li>A <b>circuit</b> is a closed walk with no repeated edges; it starts and ends at the same vertex and may pass through a vertex more than once (an Euler circuit usually does).</li>
+<li>A <b>cycle</b> is a circuit that also repeats no vertex.</li>
+<li>A <b>path</b> does not return to its starting vertex.</li>
 </ul>
 
 <h2>Boolean logic</h2>

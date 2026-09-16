@@ -80,8 +80,8 @@ More buffers let producers and consumers get further out of step with each other
 </li>
 
 <li><b>Page tables are not locked in memory and may be swapped to disk. How many page faults can a single load word (<code>lw</code>) instruction cause?</b>
-<p class="answer"><b>Answer: up to 2 per memory reference.</b><br>
-To translate the address you first need the page table. In the worst case the page table itself is on disk: one page fault. Then the page holding the data may also be on disk: a second page fault. The same reasoning applies to fetching the instruction itself, so an <code>lw</code> can fault twice in the fetch phase and twice again in the execute phase.</p>
+<p class="answer"><b>Answer: up to 2 per memory reference, so up to 4 for the whole instruction</b> (with a single-level page table).<br>
+To translate any address you first need the page table. In the worst case the page-table page itself is on disk: one page fault. Then the page holding the target may also be on disk: a second page fault. An <code>lw</code> makes two memory references, the instruction fetch and the data load, so it can fault twice in the fetch phase and twice again in the execute phase. Read the question carefully: some versions ask per phase (answer 2), others per instruction (answer 4).</p>
 </li>
 
 <li><b>If L1 is a decidable language and L2 is an undecidable language, what can be said about L1 ∪ L2?</b>

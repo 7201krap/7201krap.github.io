@@ -106,7 +106,7 @@ There are two families of solutions.
 <ul>
 <li>Variable-length ISAs allow a smaller code size than fixed-length ISAs. <b>True.</b> Common instructions can be encoded in fewer bytes.</li>
 <li>Fixed-length ISAs make instruction fetch and decode simpler. <b>True.</b> The hardware always knows where the next instruction starts.</li>
-<li>Variable-length ISAs (CISC) require more registers than fixed-length ISAs (RISC). <b>False.</b> It is the other way round: RISC machines rely on many registers because their instructions can only operate on registers.</li>
+<li>Variable-length ISAs (CISC) require more registers than fixed-length ISAs (RISC). <b>False.</b> It is the other way round: RISC machines are load/store architectures, so only load and store instructions touch memory and every arithmetic or logic instruction works on registers. That is why they need many registers.</li>
 </ul>
 
 <h2>Operand forwarding</h2>

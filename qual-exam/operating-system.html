@@ -31,7 +31,7 @@
 <li>A process is <b>new</b> when created, <b>ready</b> when it could run but the CPU is busy, <b>running</b> when it has the CPU, <b>waiting</b> when it is blocked on I/O or an event, and <b>terminated</b> when it exits.</li>
 <li>Modern operating systems use <b>preemptive</b> scheduling: the OS can take the CPU away from a running process (the "interrupt" arrow) rather than waiting for it to give up the CPU voluntarily.</li>
 <li>The <b>dispatcher</b> is the part of the OS that actually moves a process from ready to running.</li>
-<li><b>Dispatch latency</b> is the time it takes to stop one process and start running another, i.e. how long the system takes to respond to a request for a process to begin running.</li>
+<li><b>Dispatch latency</b> is the time the dispatcher needs to stop one process and start another running: the context switch, the switch to user mode, and the jump to the right instruction. Do not confuse it with <b>response time</b>, which is measured from when a request is submitted until the first response is produced.</li>
 </ul>
 
 <h2>Virtual memory</h2>
@@ -43,7 +43,7 @@ Using disk to back up RAM in this way is what "virtual memory" means.
 <ul>
 <li>Because pages can live on disk, a process's address space can be <b>larger than physical memory</b>.</li>
 <li>Pages that were pushed out to disk are brought back into RAM when the process touches them again.</li>
-<li>Paging versus segmentation: with segmentation, a large process needs a large contiguous region, which may be hard to find, so it can wait a long time. Paging chops memory into small fixed-size pages and makes much better use of free space.</li>
+<li>Paging versus segmentation: with segmentation, each segment (code, data, stack, …) must occupy one contiguous region of physical memory, so a large segment can be hard to place and free memory becomes externally fragmented. Paging chops memory into small fixed-size pages, so no contiguous region is ever required and free space is used much better.</li>
 </ul>
 <figure class="small">
 <img src="img/operating-system-2.png" alt="Logical memory mapped through a page table to physical memory and backing store">
@@ -61,7 +61,7 @@ Using disk to back up RAM in this way is what "virtual memory" means.
     <li>if the page is legitimate but just not in memory, continue.</li>
     </ul>
   </li>
-  <li>Find a free frame in physical memory (evicting another page if necessary).</li>
+  <li>Find a free frame in physical memory. If none is free, choose a victim page to evict; if the victim's dirty bit is set, it must be written back to disk first, so a single fault can cost two disk transfers.</li>
   <li>Read the page from disk into that frame.</li>
   <li>Update the page table so the entry now points to the frame and is marked valid.</li>
   <li>Restart the instruction that caused the fault. It now succeeds.</li>
