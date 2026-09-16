@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Automata Theory – Ph.D. Qualifier Exam</title>
+<title>Automata Theory – Qual Exam Prep</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="notes.css">
@@ -11,35 +11,51 @@
 <body>
 <div class="page">
 
-<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Ph.D. Qualifier Exam</a> / Automata theory</p>
+<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Qual Exam Prep</a> / Automata theory</p>
 
 <h1>Automata theory (theory of computation)</h1>
+<p class="subtitle">Most theory questions on the exam are about which class a language belongs to and what operations keep it there.</p>
+
+<h2>The language classes, from smallest to largest</h2>
+<p>
+<b>Regular</b> ⊂ <b>context-free</b> ⊂ <b>decidable</b> ⊂ <b>recognizable</b>. Regular languages are what finite
+automata (and regular expressions) can handle; context-free languages need a pushdown automaton (a stack); decidable
+and recognizable languages need a Turing machine. Keep this ordering in mind, because many questions are really asking
+"is this language still in the same class after I do X to it?"
+</p>
 
 <h2>Closure properties</h2>
+<p>A class is <em>closed</em> under an operation if applying the operation to languages in the class always gives a language in the class.</p>
+<table class="notes">
+<tr><th>Class</th><th>Union</th><th>Intersection</th><th>Concatenation</th><th>Star</th><th>Complement</th></tr>
+<tr><td>Regular</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td></tr>
+<tr><td>Context-free</td><td>yes</td><td><b>no</b></td><td>yes</td><td>yes</td><td><b>no</b></td></tr>
+<tr><td>Decidable</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td></tr>
+<tr><td>Recognizable</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td><td><b>no</b></td></tr>
+</table>
 <ul>
-<li><b>Regular languages</b> are closed under union, intersection, concatenation, star, and complement.</li>
-<li><b>Context-free languages</b> are closed under union, concatenation, and star, but <em>not</em> under intersection or complement.</li>
-<li><b>Decidable languages</b> are closed under union, intersection, concatenation, star, and complement.</li>
-<li><b>Recognizable languages</b> are closed under union, intersection, concatenation, and star, but <em>not</em> under complement.</li>
+<li>The two "no" entries for context-free languages go together: if CFLs were closed under complement, they would be closed under intersection too, by De Morgan's law.</li>
+<li>Recognizable languages are not closed under complement. If both a language and its complement are recognizable, the language is actually decidable (run both recognizers in parallel; one of them must halt).</li>
 </ul>
 
 <h2>Decidability</h2>
 <ul>
-<li>All finite languages are decidable.</li>
+<li>Every finite language is decidable: a Turing machine can simply compare the input against the finite list of members.</li>
 <li>Only an infinite language can be undecidable.</li>
-<li>Many infinite languages are decidable (Σ* is infinite but decidable).</li>
+<li>The converse is not true: plenty of infinite languages are decidable. Σ* (the set of all strings) is infinite and trivially decidable.</li>
 </ul>
 
-<h2>Some facts</h2>
+<h2>A few facts that get tested</h2>
 <ul>
-<li>Every finite language is regular.</li>
+<li>Every finite language is regular (you can write a regular expression that just lists the strings).</li>
 <li>Every subset of a countable set is either countable or finite.</li>
 </ul>
 
 <h2>Decidable vs. recognizable languages</h2>
 <ul>
-<li>A <b>decidable</b> language is also called a <b>recursive</b> language. A Turing machine for it always halts: it accepts and halts if the string is in the language, and rejects (halts) if it is not.</li>
-<li>A <b>recognizable</b> language is also called a <b>recursively enumerable</b> language. A Turing machine for it sometimes halts and sometimes may not. It accepts and halts if the string is in the language; if the string is not in the language, it either rejects (halts) or runs forever.</li>
+<li>A <b>decidable</b> (also called <b>recursive</b>) language has a Turing machine that <em>always halts</em>: it accepts strings in the language and rejects strings not in the language. It never runs forever.</li>
+<li>A <b>recognizable</b> (also called <b>recursively enumerable</b>) language has a Turing machine that accepts every string in the language, but on strings <em>not</em> in the language it may either reject or run forever. You can confirm membership, but you cannot always confirm non-membership.</li>
+<li>Every decidable language is recognizable, but not the other way around. The halting problem is the standard example of a language that is recognizable but not decidable.</li>
 </ul>
 
 <p class="topics">

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Databases – Ph.D. Qualifier Exam</title>
+<title>Databases – Qual Exam Prep</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="notes.css">
@@ -11,30 +11,35 @@
 <body>
 <div class="page">
 
-<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Ph.D. Qualifier Exam</a> / Databases</p>
+<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Qual Exam Prep</a> / Databases</p>
 
 <h1>Databases</h1>
+<p class="subtitle">Keys, transactions, indexes, and normalization. The questions are mostly definitions.</p>
 
 <h2>Primary key vs. foreign key</h2>
+<p>
+A <b>primary key</b> uniquely identifies a row within its own table. A <b>foreign key</b> is a column that refers
+to the primary key of another table; it is how tables are linked. In the example below, each order belongs to one
+customer, so the Orders table stores the customer's ID as a foreign key.
+</p>
 <table class="notes">
 <tr><th>Orders</th><th>Customers</th></tr>
 <tr>
-<td>Order_ID (PK, primary key)<br>Customer_ID (FK, foreign key)<br>Product</td>
-<td>Customer_ID (PK, primary key)<br>Name<br>Address</td>
+<td>Order_ID (primary key)<br>Customer_ID (foreign key → Customers)<br>Product</td>
+<td>Customer_ID (primary key)<br>Name<br>Address</td>
 </tr>
 </table>
 
 <h2>Transaction log</h2>
-<p>Also known as the database log or binary log.</p>
+<p>Also called the database log or binary log.</p>
 <ul>
-<li>It stores a record of all data changes made to the database.</li>
-<li>It guarantees the ACID properties of the database.</li>
-<li>ACID is the set of properties that guarantee a database transaction is executed safely:
+<li>It records every change made to the data, in order. If the system crashes halfway through a transaction, the log is what lets the database roll back or redo the work.</li>
+<li>That is what makes the <b>ACID</b> guarantees possible. ACID is the set of properties that make a transaction safe:
   <ul>
-  <li><b>Atomicity:</b> the operations in a transaction are never partially executed and then interrupted; either all of them happen or none of them do.</li>
-  <li><b>Consistency:</b> data can only be modified in ways allowed by predefined rules.</li>
-  <li><b>Isolation:</b> other transactions cannot interfere with a transaction while it runs.</li>
-  <li><b>Durability:</b> a successfully committed transaction is permanently reflected in the database.</li>
+  <li><b>Atomicity:</b> a transaction is all-or-nothing. It never stops halfway with some of its changes applied.</li>
+  <li><b>Consistency:</b> a transaction moves the database from one valid state to another; data can only be changed in ways that respect the defined rules and constraints.</li>
+  <li><b>Isolation:</b> concurrent transactions do not interfere with each other. Each one behaves as if it were running alone.</li>
+  <li><b>Durability:</b> once a transaction commits, its changes survive crashes and power loss.</li>
   </ul>
 </li>
 </ul>
@@ -46,44 +51,44 @@
 
 <h2>NoSQL</h2>
 <ul>
-<li>Not a relational database; relationships between tables are not defined.</li>
-<li>Data is represented as (key, value) pairs and only input/output by key is supported. No JOIN is needed. Handles very large volumes of data. No schema. Downside: data updates are slow.</li>
+<li>"Not only SQL": databases that are not relational and do not define relationships between tables.</li>
+<li>The simplest kind stores data as (key, value) pairs and supports reads and writes by key only. There are no joins, no fixed schema, and it scales to very large amounts of data. The trade-off is that updating data tends to be slower and you lose the query flexibility of SQL.</li>
 </ul>
 
 <h2>Normalization</h2>
 <ul>
-<li>Normalization is the process of deciding the structure of the data during relational database design so as to minimize data redundancy.</li>
-<li>Typically, large and poorly organized tables are broken into smaller, well-organized tables.</li>
+<li>Normalization is the process of organizing tables during relational database design so that each fact is stored in one place, which minimizes redundancy.</li>
+<li>In practice it means splitting large, loosely organized tables into smaller, well-structured ones.</li>
 </ul>
 
 <h2>Clustered vs. non-clustered index</h2>
 <ul>
 <li><b>Clustered index</b>
   <ul>
-  <li>Defines the order in which data is physically stored in the table.</li>
-  <li>Example: a dictionary.</li>
+  <li>Determines the physical order in which the rows are stored on disk. The table <em>is</em> the index.</li>
+  <li>Analogy: a dictionary, where the entries are physically sorted by the word.</li>
   </ul>
 </li>
 <li><b>Non-clustered index</b>
   <ul>
-  <li>Stored in one place while the table data is stored in another.</li>
-  <li>Example: the index at the back of a book.</li>
+  <li>A separate structure that stores the key and a pointer to where the row actually lives.</li>
+  <li>Analogy: the index at the back of a book, which points you to the page.</li>
   </ul>
 </li>
-<li>Some facts:
+<li>Consequences:
   <ul>
-  <li>A table can have only one clustered index.</li>
-  <li>A table can have multiple non-clustered indexes.</li>
-  <li>A clustered index is faster than a non-clustered index.</li>
+  <li>A table can have only <b>one</b> clustered index, because the rows can only be physically sorted one way.</li>
+  <li>A table can have <b>many</b> non-clustered indexes.</li>
+  <li>Reading through a clustered index is faster, since there is no extra lookup step.</li>
   </ul>
 </li>
 </ul>
 
 <h2>Normal forms</h2>
 <ul>
-<li><b>1NF:</b> a relation is in first normal form if the domain of every attribute consists of atomic values only.</li>
-<li><b>2NF:</b> a relation is in second normal form if it is in 1NF and has no partial dependencies, i.e. no non-key attribute depends on only part of the primary key. A partial dependency is a dependency on only one of the keys of a composite primary key; without a composite primary key there is no partial dependency. In practice, columns unrelated to the core subject of the table are moved out.</li>
-<li><b>3NF:</b> a relation is in third normal form if every non-key attribute is functionally dependent on the primary key only. Columns that depend on an ordinary (non-key) column are moved to a separate table.</li>
+<li><b>First normal form (1NF):</b> every attribute holds a single atomic value. No lists inside a cell, no repeating groups of columns.</li>
+<li><b>Second normal form (2NF):</b> 1NF plus no <em>partial dependencies</em>. This only matters when the primary key is composite (made of several columns): no non-key column may depend on just part of the key. If a column depends on only one piece of the key, it belongs in its own table. A table with a single-column primary key is automatically in 2NF.</li>
+<li><b>Third normal form (3NF):</b> 2NF plus no <em>transitive dependencies</em>. Every non-key column must depend on the primary key directly, not on some other non-key column. If column C depends on column B, which depends on the key, move B and C into a separate table.</li>
 </ul>
 
 <p class="topics">

@@ -36,18 +36,43 @@ li { margin-bottom: 4px; }
 li ul, li ol { margin: 4px 0 4px; }
 
 figure {
-  margin: 12px 0 18px;
+  margin: 16px auto 24px;
+  text-align: center;
 }
 figure img {
-  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  max-width: min(100%, 620px);
   height: auto;
-  border: 1px solid #e5e5e5;
+  padding: 10px;
   background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
+figure.wide img { max-width: 100%; }
+figure.small img { max-width: min(100%, 420px); }
+figure.pair {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+figure.pair img {
+  flex: 1 1 260px;
+  max-width: calc(50% - 6px);
+  margin: 0;
+}
+figure.pair figcaption { flex-basis: 100%; }
 figcaption {
   font-size: 14px;
-  color: #555;
-  margin-top: 4px;
+  color: #666;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+figcaption a { color: #7a1c2b; }
+@media (max-width: 600px) {
+  figure.pair img { max-width: 100%; }
 }
 
 code {

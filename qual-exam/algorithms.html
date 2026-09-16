@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Algorithms – Ph.D. Qualifier Exam</title>
+<title>Algorithms – Qual Exam Prep</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="notes.css">
@@ -11,270 +11,260 @@
 <body>
 <div class="page">
 
-<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Ph.D. Qualifier Exam</a> / Algorithms</p>
+<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Qual Exam Prep</a> / Algorithms</p>
 
-<h1>Algorithms</h1>
+<h1>Algorithms and data structures</h1>
+<p class="subtitle">The largest part of the exam. Most questions ask for a running time, a property, or which algorithm applies.</p>
 
-<h2>Hash table</h2>
+<h2>Hash tables</h2>
 <ul>
-<li>When a collision occurs, it has to be handled. The two main approaches are <b>chaining</b> (closed addressing) and <b>open addressing</b>. Chaining uses a linked list at each slot; open addressing uses a rule to store the value under a different key. Open addressing methods include linear probing, quadratic probing, and double hashing.</li>
-<li><b>Collision:</b> two keys map to the same slot. The situation where a newly inserted key maps to an already occupied slot is called a collision and must be handled by some collision-handling technique (<a href="https://www.geeksforgeeks.org/separate-chaining-collision-handling-technique-in-hashing/">GeeksforGeeks</a>).</li>
+<li>A hash function maps each key to a slot. A <b>collision</b> is when two different keys map to the same slot, and every hash table needs a way to deal with it (<a href="https://www.geeksforgeeks.org/separate-chaining-collision-handling-technique-in-hashing/">GeeksforGeeks</a>).</li>
+<li><b>Chaining</b> (closed addressing): each slot holds a linked list, and colliding keys are simply appended to the list.</li>
+<li><b>Open addressing</b>: everything stays in the array. On a collision, a rule picks another slot to try: <b>linear probing</b> (try the next slot), <b>quadratic probing</b> (try slots 1, 4, 9, … away), or <b>double hashing</b> (the step size comes from a second hash function).</li>
+<li>Either way, search, insert, and delete are O(1) on average and O(n) in the worst case, when everything lands in the same slot.</li>
 </ul>
-<figure>
+<figure class="wide">
 <img src="img/algorithms-1.png" alt="Time complexity tables for open addressing and chaining: O(1) best and average, O(n) worst">
 <figcaption>Source: <a href="https://iq.opengenus.org/time-complexity-of-hash-table/">OpenGenus</a></figcaption>
 </figure>
 
 <h2>BFS and DFS</h2>
 <ul>
-<li>Time complexity of BFS: O(V + E) with an adjacency list; O(V²) with an adjacency matrix.</li>
-<li>Time complexity of DFS: O(V + E) with an adjacency list; O(V²) with an adjacency matrix.</li>
+<li>Both visit every vertex and every edge once, so both run in <b>O(V + E)</b> with an adjacency list.</li>
+<li>With an adjacency matrix, finding the neighbors of a vertex means scanning a whole row, so the time becomes <b>O(V²)</b>.</li>
 </ul>
 
 <h2>Topological sort</h2>
 <ul>
-<li>Orders the nodes of a DAG (directed acyclic graph).</li>
-<li>Time complexity is O(V + E).</li>
-<li>Method: list the vertices with in-degree 0 in order. Remove a vertex with in-degree 0 together with its outgoing edges. Repeat.</li>
+<li>Orders the vertices of a <b>directed acyclic graph</b> (DAG) so that every edge points from an earlier vertex to a later one. Think of tasks with prerequisites.</li>
+<li>Method (Kahn's algorithm): repeatedly take a vertex with no incoming edges, output it, and delete it along with its outgoing edges. If you run out of such vertices before the graph is empty, the graph has a cycle.</li>
+<li>Time: O(V + E).</li>
 </ul>
 
-<h2>Shortest path problems</h2>
+<h2>Shortest paths</h2>
 <ul>
-<li><b>Single source:</b> shortest paths from one source node S to every other node (Bellman–Ford, Dijkstra).</li>
-<li><b>Single pair:</b> shortest path from a source S to a destination T.</li>
-<li><b>All pairs:</b> shortest paths between every pair of nodes (Floyd–Warshall, Johnson).</li>
-<li>Important: any sub-path of a shortest path is itself a shortest path.</li>
-<li>The longest path problem on a DAG can be solved in polynomial time.</li>
+<li><b>Single source:</b> shortest paths from one vertex to all others (Bellman–Ford, Dijkstra).</li>
+<li><b>Single pair:</b> from one vertex to one other vertex. In practice you run a single-source algorithm and stop early.</li>
+<li><b>All pairs:</b> between every pair of vertices (Floyd–Warshall, Johnson).</li>
+<li>Useful fact: any sub-path of a shortest path is itself a shortest path. This is the optimal substructure that all of these algorithms rely on.</li>
+<li>The <em>longest</em> path problem is NP-hard in general, but on a DAG it is easy: process the vertices in topological order.</li>
 </ul>
 
-<h3>Bellman–Ford (not greedy)</h3>
+<h3>Bellman–Ford</h3>
 <ul>
-<li>Works on both directed and undirected graphs.</li>
-<li>It can handle directed graphs with negative weights, as long as there are no negative cycles (<a href="https://www.baeldung.com/cs/dijkstra-vs-bellman-ford">Baeldung</a>).</li>
-<li>In an undirected graph, negative weights are not allowed. Negative cycles are never allowed.</li>
-<li>Time complexity: O(EV) = O(V³). Every edge is relaxed V − 1 times.</li>
+<li>Not greedy. It relaxes every edge, and repeats that V − 1 times.</li>
+<li>Works on directed and undirected graphs, and handles <b>negative edge weights</b> as long as there is no negative cycle (<a href="https://www.baeldung.com/cs/dijkstra-vs-bellman-ford">Baeldung</a>). It can also detect a negative cycle: if a V-th round still improves something, there is one.</li>
+<li>In an undirected graph a negative edge <em>is</em> a negative cycle (go back and forth along it), so negative weights are only meaningful in directed graphs.</li>
+<li>Time: O(VE), which is O(V³) on a dense graph.</li>
 </ul>
 
-<h3>Dijkstra (greedy)</h3>
+<h3>Dijkstra</h3>
 <ul>
-<li>Works on both directed and undirected graphs.</li>
-<li>Assumes there are no negative weights.</li>
-<li>Bellman–Ford and Dijkstra give the same final result.</li>
-<li>Time complexity: O(V²), or O(V + E log V) with a min-priority queue.</li>
+<li>Greedy: always settle the closest unsettled vertex next.</li>
+<li>Works on directed and undirected graphs, but <b>assumes no negative weights</b>. With negative edges the greedy choice can be wrong.</li>
+<li>When both apply, Bellman–Ford and Dijkstra give the same answer; Dijkstra is just faster.</li>
+<li>Time: O(V²) with a simple array, or O((V + E) log V) with a binary min-heap.</li>
 </ul>
 
-<h3>Floyd–Warshall (dynamic programming)</h3>
+<h3>Floyd–Warshall</h3>
 <ul>
-<li>Works on both directed and undirected graphs.</li>
-<li>For directed graphs, negative weights are allowed.</li>
-<li>Finds the shortest path length between every pair of nodes (all-pairs shortest path).</li>
-<li>Time complexity: O(V³).</li>
+<li>Dynamic programming over "paths that only use the first k vertices as intermediates".</li>
+<li>Works on directed and undirected graphs, and on directed graphs it tolerates negative weights (but not negative cycles).</li>
+<li>Produces the shortest path length between <em>every</em> pair of vertices.</li>
+<li>Time: O(V³), regardless of how many edges there are.</li>
 </ul>
 
 <h3>Johnson's algorithm</h3>
 <ul>
-<li>On sparse graphs, Johnson's algorithm performs better than Floyd–Warshall, so it is the better choice there.</li>
-<li>More detail than this does not seem necessary.</li>
+<li>Also all-pairs. It reweights the graph with one run of Bellman–Ford so that Dijkstra can be run from every vertex.</li>
+<li>Faster than Floyd–Warshall on <b>sparse</b> graphs (few edges). For the exam, knowing that much is enough.</li>
 </ul>
 
-<h2>Minimum spanning tree</h2>
+<h2>Minimum spanning tree (MST)</h2>
 <ul>
-<li>A <b>spanning tree</b> is a subgraph that connects all vertices of the graph and contains no cycle.
-  <ul>
-  <li>When edges are weighted, the MST connects all the vertices at minimum total cost.</li>
-  <li>The solution is not unique.</li>
-  <li>Defined on undirected weighted graphs; weights must be positive.</li>
-  <li>The solution is always a tree, so it has no cycle. A tree with n nodes always has n − 1 edges.</li>
-  </ul>
-</li>
-<li><b>Generic MST algorithm</b>
+<li>A <b>spanning tree</b> of a connected graph is a subgraph that touches every vertex and has no cycles. With n vertices it always has exactly n − 1 edges.</li>
+<li>The <b>minimum</b> spanning tree is the spanning tree whose edge weights add up to the least. Think of connecting cities with the cheapest possible set of roads.</li>
+<li>It is defined on undirected, weighted graphs. The MST is not necessarily unique (ties in edge weight can give several), but its total weight is.</li>
+<li><b>Generic algorithm:</b> start with an empty edge set A; repeatedly add an edge that is "safe" (keeps A a subset of some MST); stop at n − 1 edges. Kruskal and Prim are two different ways to pick a safe edge.</li>
+<li><b>Kruskal's algorithm</b> (greedy, edge-based)
   <ol>
-  <li>Start with A = ∅.</li>
-  <li>Find an edge that is safe for A and add it to A.</li>
-  <li>Repeat step 2 until there are n − 1 edges.</li>
+  <li>Sort all edges by weight.</li>
+  <li>Go through them in order and keep an edge unless it would create a cycle with the edges already kept (use a union-find structure to check).</li>
+  <li>Stop after n − 1 edges.</li>
   </ol>
+  Time: O(E log E) = O(E log V), dominated by the sort.
 </li>
-<li><b>Kruskal's algorithm</b> (greedy)
+<li><b>Prim's algorithm</b> (greedy, vertex-based)
   <ol>
-  <li>Sort the edges by weight in ascending order.</li>
-  <li>Take the edges one by one in that order, skipping any edge that would form a cycle with the edges already chosen.</li>
-  <li>Stop when n − 1 edges have been chosen.</li>
+  <li>Start from any vertex.</li>
+  <li>Grow a single tree outward.</li>
+  <li>At each step add the cheapest edge that connects a vertex in the tree to one outside it.</li>
   </ol>
-  Time complexity: O(E log E) = O(E log V).
+  Time: O(E log V) with a binary heap, O(V²) with a plain array (which is fine for dense graphs).
 </li>
-<li><b>Prim's algorithm</b> (greedy)
-  <ol>
-  <li>Pick an arbitrary start node.</li>
-  <li>Grow the tree from the start node.</li>
-  <li>At each step, choose the lightest edge that connects a node already in the tree to a node not yet in the tree.</li>
-  </ol>
-  Time complexity: O(E log E) = O(E log V) with a priority heap; O(V²) without one.
-</li>
-<li>Prim and Kruskal produce the same total edge weight, but the chosen edges may differ.</li>
+<li>Prim and Kruskal always agree on the total weight, but they may pick different edges when there are ties.</li>
 </ul>
 
-<h2>Pre-order, in-order, and post-order traversal</h2>
+<h2>Tree traversals</h2>
 <ul>
-<li>The best video I have found: <a href="https://www.youtube.com/watch?v=WLvU5EQVZqY">YouTube</a></li>
-<li><b>Pre-order:</b> print a node the first time it is visited.</li>
-<li><b>In-order:</b> print a node the second time it is visited.</li>
-<li><b>Post-order:</b> print a node the third time it is visited.</li>
+<li>Walk the tree recursively, and imagine you pass each node three times: once on the way down, once between its children, and once on the way back up.</li>
+<li><b>Pre-order:</b> output the node the first time you pass it (node, left, right).</li>
+<li><b>In-order:</b> output it the second time (left, node, right). On a binary search tree this gives the keys in sorted order.</li>
+<li><b>Post-order:</b> output it the third time (left, right, node).</li>
+<li>The clearest explanation I have found is <a href="https://www.youtube.com/watch?v=WLvU5EQVZqY">this video</a>.</li>
 </ul>
 
 <h2>Dynamic programming</h2>
 <ul>
-<li>Write a recurrence.</li>
-<li>Solve the recurrence either with memoization (top-down: cache intermediate results to avoid repeated computation, and solve only the subproblems actually needed) or bottom-up (no recursion overhead).</li>
+<li>Step 1: write a recurrence that expresses the answer to a problem in terms of answers to smaller subproblems.</li>
+<li>Step 2: solve it without recomputing the same subproblem over and over, in one of two ways:
+  <ul>
+  <li><b>Top-down with memoization:</b> write the recursion naturally, but cache every result. Only the subproblems actually needed get solved.</li>
+  <li><b>Bottom-up:</b> fill a table from the smallest subproblems upward. No recursion, so no function-call overhead.</li>
+  </ul>
+</li>
 </ul>
 
 <h2>Optimal substructure</h2>
 <ul>
-<li>A problem has optimal substructure if an optimal solution can be constructed efficiently from optimal solutions of its subproblems.</li>
-<li>Divide and conquer, greedy algorithms, and dynamic programming all exploit optimal substructure.</li>
+<li>A problem has optimal substructure if an optimal solution can be built from optimal solutions to its subproblems. Shortest paths have it; longest simple paths do not.</li>
+<li>Divide and conquer, greedy algorithms, and dynamic programming all depend on it.</li>
 </ul>
 
 <h2>Recursion</h2>
 <ul>
-<li>How does a recursion avoid an infinite loop? Think of the Fibonacci numbers.
+<li>What keeps a recursive function from running forever? Think of the Fibonacci numbers.
   <ul>
-  <li><b>Base case:</b> there must be at least one case that does not recurse.</li>
-  <li><b>Recursive case:</b> repeated recursion must eventually converge to the base case.</li>
+  <li><b>Base case:</b> at least one input for which the function returns without calling itself (fib(0) and fib(1)).</li>
+  <li><b>Recursive case:</b> every recursive call must move toward the base case (fib(n) calls fib(n − 1) and fib(n − 2)).</li>
   </ul>
 </li>
-<li>A recursive function P should have an execution path on which it does not call itself.</li>
-<li>P should either refer to a global variable or have at least one parameter.</li>
+<li>Put differently: a recursive function must have an execution path on which it does not call itself, and it must have something (a parameter or a global variable) that changes between calls so that the base case is eventually reached.</li>
 </ul>
 
 <h2>2-SAT vs. 3-SAT</h2>
 <ul>
-<li>2-SAT is in P.</li>
-<li>3-SAT is in NP (NP-complete).</li>
+<li><b>2-SAT</b> (each clause has two literals) is in <b>P</b>; it reduces to finding strongly connected components in an implication graph.</li>
+<li><b>3-SAT</b> (three literals per clause) is <b>NP-complete</b>. It is the standard starting point for NP-hardness reductions.</li>
 </ul>
 
-<h2>P and NP</h2>
+<h2>P, NP, NP-hard, NP-complete</h2>
 <ul>
-<li><b>P</b> stands for polynomial time: problems that can be solved by a deterministic machine in polynomial time.</li>
-<li><b>NP</b> stands for non-deterministic polynomial time: problems that can be solved by a non-deterministic machine in polynomial time.</li>
-<li><b>NP-hard</b> problems are at least as hard as the hardest problems in NP.
+<li><b>P</b> (polynomial time): problems a deterministic machine can solve in polynomial time. Sorting, shortest paths, 2-SAT.</li>
+<li><b>NP</b> (non-deterministic polynomial time): problems a non-deterministic machine can solve in polynomial time. Equivalently, problems whose "yes" answers can be <em>verified</em> in polynomial time if someone hands you a certificate. P ⊆ NP.</li>
+<li><b>NP-hard:</b> at least as hard as every problem in NP. Formally, X is NP-hard if every problem in NP can be reduced to X in polynomial time. NP-hard problems need not themselves be in NP (the halting problem is NP-hard but not in NP).</li>
+<li><b>NP-complete:</b> in NP <em>and</em> NP-hard. These are the hardest problems in NP. 3-SAT, clique, Hamiltonian cycle, graph coloring.</li>
+<li>How reductions are used:
   <ul>
-  <li>Not all NP-hard problems are in NP.</li>
-  <li>A problem X is NP-hard if, for every problem Y in NP, there is a polynomial-time reduction from Y to X.</li>
-  </ul>
-</li>
-<li>A problem is <b>NP-complete</b> if it is both in NP and NP-hard.
-  <ul>
-  <li>To prove that problem A is NP-hard, reduce a known NP-hard problem to A.</li>
-  <li>If Q is NP-complete and Q is polynomial-time reducible to R, then R is NP-hard (and so R is not in P unless P = NP).</li>
-  <li>If every problem in NP can be reduced to X, then X is NP-hard.</li>
+  <li>To prove A is NP-hard, take a known NP-hard problem and reduce it to A (not the other way round).</li>
+  <li>If Q is NP-complete and Q reduces in polynomial time to R, then R is NP-hard, and therefore R is not in P unless P = NP.</li>
   </ul>
 </li>
 </ul>
 <figure>
 <img src="img/algorithms-2.png" alt="Euler diagram of P, NP, NP-complete, and NP-hard under the assumptions P ≠ NP and P = NP">
-<figcaption>Source: <a href="https://en.wikipedia.org/wiki/P_versus_NP_problem">Wikipedia, P versus NP problem</a></figcaption>
+<figcaption>How the classes relate if P ≠ NP (left) and if P = NP (right). Source: <a href="https://en.wikipedia.org/wiki/P_versus_NP_problem">Wikipedia</a></figcaption>
 </figure>
 
-<h2>Depth and height in a tree</h2>
+<h2>Depth and height of a tree node</h2>
 <ul>
-<li><b>Depth</b> is counted from the root, starting at 0.</li>
-<li><b>Height</b> is counted from the leaves, starting at 0.</li>
+<li><b>Depth</b> is measured from the root: the root has depth 0, its children depth 1, and so on.</li>
+<li><b>Height</b> is measured from the leaves: a leaf has height 0, and a node's height is one more than the height of its tallest child. The height of the tree is the height of the root.</li>
 </ul>
-<figure>
+<figure class="small">
 <img src="img/algorithms-3.png" alt="A tree with each node labeled by its depth and height">
 <figcaption>Source: <a href="https://stackoverflow.com/questions/2603692/what-is-the-difference-between-tree-depth-and-height">Stack Overflow</a></figcaption>
 </figure>
 
 <h2>Maximum flow</h2>
 <ul>
-<li>Max-flow algorithms are not greedy.</li>
+<li>Max-flow algorithms are <b>not greedy</b>: they repeatedly find an augmenting path in the residual graph, and a later path may undo part of an earlier one.</li>
 <li><b>Ford–Fulkerson</b>
   <ul>
-  <li>Uses DFS.</li>
-  <li>Time complexity: O(E · f), where f is the maximum flow of the network.</li>
+  <li>Finds augmenting paths with DFS.</li>
+  <li>Time: O(E · f), where f is the value of the maximum flow. With badly chosen paths it can be very slow when capacities are large.</li>
   </ul>
 </li>
-<li><b>Edmonds–Karp</b> (a modified form of Ford–Fulkerson)
+<li><b>Edmonds–Karp</b> (Ford–Fulkerson with a specific rule)
   <ul>
-  <li>Uses BFS.</li>
-  <li>Time complexity: O(V · E²).</li>
+  <li>Finds augmenting paths with BFS, i.e. always the shortest one.</li>
+  <li>Time: O(V · E²), independent of the capacities.</li>
   </ul>
 </li>
 </ul>
 
 <h2>AVL tree</h2>
 <ul>
-<li>A binary search tree in which, for every node, the heights of the left and right subtrees differ by at most 1.</li>
-<li>Rotations may be required on insertion or deletion.</li>
-<li>The height of the tree cannot exceed 1.44 · log N, where N is the number of nodes.</li>
-<li>Search, insert, and delete take O(log N).</li>
+<li>A binary search tree that keeps itself balanced: for every node, the heights of its left and right subtrees differ by at most 1.</li>
+<li>Insertions and deletions can break the balance, and it is restored with rotations.</li>
+<li>Because of the balance rule, the height is at most about 1.44 · log₂ N for N nodes.</li>
+<li>Search, insert, and delete are all O(log N).</li>
 </ul>
 
 <h2>Red–black tree</h2>
 <ul>
-<li>Each node is colored red or black.</li>
-<li>The root and the leaves (NIL) are always black.</li>
-<li>If a node is red, its children are black.</li>
-<li>All paths from a node to its NIL descendants contain the same number of black nodes (the black height).</li>
-<li>Each node needs one storage bit to keep track of its color.</li>
-<li>The longest path P (root to farthest NIL) is no more than twice the length of the shortest path p (root to nearest NIL): P ≤ 2p.</li>
-<li>Number of NIL leaves = 1 + number of interior nodes.</li>
-<li>Rotations may be required on insertion and deletion.</li>
-<li>Search, insert, and delete take O(log N).</li>
+<li>Another self-balancing binary search tree. Every node is colored red or black, and the colors follow these rules:
+  <ul>
+  <li>The root is black, and every leaf (the NIL sentinels) is black.</li>
+  <li>A red node has only black children (no two reds in a row).</li>
+  <li>Every path from a node down to its NIL descendants passes through the same number of black nodes (the <b>black height</b>).</li>
+  </ul>
+</li>
+<li>These rules guarantee that the longest root-to-leaf path is at most twice the shortest one, which is enough to keep the height O(log N).</li>
+<li>Each node needs just one extra bit to store its color.</li>
+<li>Number of NIL leaves = number of interior nodes + 1.</li>
+<li>Insertion and deletion may require recoloring and rotations. Search, insert, and delete are all O(log N).</li>
 </ul>
 
 <h2>B-tree</h2>
 <ul>
-<li>Rotations are not required.</li>
-<li>All leaves have the same depth.</li>
-<li>Height = number of disk operations.</li>
-<li>Height ≤ log<sub>t</sub>((N + 1) / 2), where t is the minimum degree of the B-tree.</li>
-<li>Search, insert, and delete take O(log N).</li>
+<li>A balanced search tree in which each node holds many keys and has many children. It is designed for disk: one node is one disk block, so the number of disk reads is the height of the tree.</li>
+<li>All leaves are at the same depth. Balance is kept by splitting and merging nodes, so no rotations are needed.</li>
+<li>Height ≤ log<sub>t</sub>((N + 1) / 2), where t is the minimum degree (the minimum number of children per internal node).</li>
+<li>Search, insert, and delete are O(log N).</li>
 </ul>
 
 <h2>Simple graph</h2>
 <ul>
-<li>Also called a strict graph.</li>
-<li>Unweighted, undirected, no loops, and no multiple edges between nodes.</li>
+<li>Also called a strict graph: undirected, unweighted, no self-loops, and at most one edge between any two vertices.</li>
 </ul>
 
 <h2>Loop invariant</h2>
 <ul>
-<li>A property that does not change before and after each iteration of a loop.</li>
-<li>It is true at the beginning of each execution of the loop and at the completion of the loop.</li>
+<li>A statement about the program's variables that is true before the loop starts, stays true after each iteration, and is therefore still true when the loop ends. Proving a loop correct means finding the right invariant.</li>
 </ul>
 
-<h2>Singly vs. doubly linked list</h2>
+<h2>Singly vs. doubly linked lists</h2>
 <ul>
-<li>The following applies to both (singly: think of a pointer to the first node; doubly: pointers to the first and last nodes).</li>
-<li>Singly linked list: search O(N), insertion O(1), deletion O(1).</li>
-<li>Doubly linked list: search O(N), insertion O(1), deletion O(1).</li>
-<li><b>Insertion</b>
+<li>Search is O(N) for both; you have to walk the list.</li>
+<li>Insertion and deletion are O(1) for both, <em>once you are at the right position</em> (for a singly linked list, that means having a pointer to the node before the position).</li>
+<li><b>Insertion</b> after node A:
   <ol>
   <li>Create the new node.</li>
-  <li>Point the previous node at the new node.</li>
-  <li>Point the new node at the next node.</li>
+  <li>Point the new node at A's old successor.</li>
+  <li>Point A at the new node.</li>
   </ol>
 </li>
-<li><b>Deletion</b>
+<li><b>Deletion</b> of B from A → B → C:
   <ol>
-  <li>Suppose we want to delete B from A → B → C.</li>
-  <li>Make A → C (A's pointer now points to C instead of B) while leaving B → C as it is.</li>
-  <li>Remove B.</li>
+  <li>Point A at C instead of B.</li>
+  <li>B still points at C, which is harmless.</li>
+  <li>Free B.</li>
   </ol>
 </li>
+<li>A doubly linked list also keeps a pointer to the previous node, so it can be walked backward and a node can be removed with only a pointer to that node.</li>
 </ul>
 
 <h2>Common data structures and their time complexities</h2>
-<figure>
+<figure class="wide">
 <img src="img/algorithms-4.png" alt="Table of average and worst-case access, search, insertion, and deletion complexities for common data structures">
 <figcaption>Source: <a href="https://www.bigocheatsheet.com/">Big-O Cheat Sheet</a></figcaption>
 </figure>
 
 <h2>Clique</h2>
 <ul>
-<li>A subgraph that is also a complete graph.</li>
-<li><b>Clique decision problem:</b> decide whether a clique of size k exists in the given graph.</li>
-<li>The clique decision problem is NP-complete.</li>
+<li>A clique is a set of vertices in which every pair is connected by an edge, i.e. a subgraph that is a complete graph.</li>
+<li>The <b>clique decision problem</b> asks whether the graph contains a clique of size k. It is NP-complete.</li>
 </ul>
 <figure>
 <img src="img/algorithms-5.png" alt="Two example graphs with cliques of size 2, 3, and 4 highlighted">
@@ -283,19 +273,20 @@
 
 <h2>Eulerian vs. Hamiltonian</h2>
 <ul>
-<li>An <b>Eulerian</b> circuit/path uses every edge in the graph exactly once.
+<li>An <b>Eulerian</b> path uses every <em>edge</em> exactly once; an Eulerian circuit does so and returns to the start.
   <ul>
-  <li>An Euler path exists when exactly two vertices have odd degree.</li>
-  <li>An Euler circuit exists when no vertex has odd degree.</li>
+  <li>A connected graph has an Euler circuit if and only if every vertex has even degree.</li>
+  <li>It has an Euler path (but not a circuit) if and only if exactly two vertices have odd degree; the path starts at one of them and ends at the other.</li>
+  <li>Checking this is easy, so the Eulerian problems are in P.</li>
   </ul>
 </li>
-<li>A <b>Hamiltonian</b> circuit/path visits every vertex exactly once.</li>
+<li>A <b>Hamiltonian</b> path visits every <em>vertex</em> exactly once; a Hamiltonian circuit also returns to the start. Deciding whether one exists is NP-complete.</li>
 </ul>
 
 <h2>Circuit vs. path</h2>
 <ul>
-<li><b>Circuit:</b> starts and ends at the same vertex.</li>
-<li><b>Path:</b> does not need to start and end at the same vertex.</li>
+<li>A <b>circuit</b> (or cycle) starts and ends at the same vertex.</li>
+<li>A <b>path</b> does not have to.</li>
 </ul>
 
 <h2>Boolean logic</h2>
@@ -303,10 +294,10 @@
 <li>AND: A · B</li>
 <li>OR: A + B</li>
 <li>NOT: ¬A</li>
-<li>NAND: ¬(A · B) = ¬A + ¬B</li>
-<li>NOR: ¬(A + B) = ¬A · ¬B</li>
-<li>XOR: A ⊕ B = (A + B) · (¬A + ¬B) = A · ¬B + ¬A · B</li>
-<li>XNOR: A ⊙ B = (A + ¬B) · (¬A + B) = A · B + ¬A · ¬B</li>
+<li>NAND: ¬(A · B) = ¬A + ¬B (De Morgan)</li>
+<li>NOR: ¬(A + B) = ¬A · ¬B (De Morgan)</li>
+<li>XOR: A ⊕ B = A · ¬B + ¬A · B = (A + B) · (¬A + ¬B). True when the inputs differ.</li>
+<li>XNOR: A ⊙ B = A · B + ¬A · ¬B = (A + ¬B) · (¬A + B). True when the inputs are equal.</li>
 </ul>
 
 <p class="topics">

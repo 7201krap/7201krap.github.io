@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Networking – Ph.D. Qualifier Exam</title>
+<title>Networking – Qual Exam Prep</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="notes.css">
@@ -11,25 +11,28 @@
 <body>
 <div class="page">
 
-<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Ph.D. Qualifier Exam</a> / Networking</p>
+<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Qual Exam Prep</a> / Networking</p>
 
 <h1>Networking</h1>
+<p class="subtitle">Layers, protocols, and a handful of mechanisms you should be able to explain in one sentence each.</p>
 
-<h2>OSI model</h2>
-<ul>
-<li><b>Layer 7, Application</b></li>
-<li><b>Layer 6, Presentation.</b> Converts the system-dependent representation of data into an independent form. Data compression and encryption.</li>
-<li><b>Layer 5, Session</b></li>
-<li><b>Layer 4, Transport.</b> Unit: segment (TCP) or datagram (UDP). Controls the reliability of a link through flow control, segmentation and desegmentation, and error control. It keeps track of segments and retransmits those that fail.</li>
-<li><b>Layer 3, Network.</b> Unit: packet. Responsible for packet forwarding, including routing through intermediate routers.</li>
-<li><b>Layer 2, Data link.</b> Unit: frame.</li>
-<li><b>Layer 1, Physical.</b> Unit: bit.</li>
-</ul>
+<h2>The OSI model</h2>
+<p>Seven layers, from the application down to the wire. Each layer has its own name for the unit of data it handles.</p>
+<table class="notes">
+<tr><th>Layer</th><th>Unit</th><th>What it does</th></tr>
+<tr><td>7. Application</td><td></td><td>The protocols programs use directly: HTTP, SMTP, DNS, and so on.</td></tr>
+<tr><td>6. Presentation</td><td></td><td>Converts data from the sender's system-specific representation into a common form. Compression and encryption happen here.</td></tr>
+<tr><td>5. Session</td><td></td><td>Opens, manages, and closes sessions between applications.</td></tr>
+<tr><td>4. Transport</td><td>Segment (TCP), datagram (UDP)</td><td>End-to-end reliability: flow control, splitting data into segments and reassembling it, error control. TCP keeps track of segments and retransmits any that are lost.</td></tr>
+<tr><td>3. Network</td><td>Packet</td><td>Forwards packets toward their destination, including routing through intermediate routers. IP lives here.</td></tr>
+<tr><td>2. Data link</td><td>Frame</td><td>Delivers frames between directly connected nodes. Ethernet and MAC addresses live here.</td></tr>
+<tr><td>1. Physical</td><td>Bit</td><td>Puts bits on the cable, fiber, or radio.</td></tr>
+</table>
 
 <h2>Client–server vs. peer-to-peer</h2>
 <ul>
-<li>Client–server requires central servers that respond to client requests.</li>
-<li>Peer-to-peer decentralizes resources; data can be located anywhere, on any connected device.</li>
+<li>In a <b>client–server</b> network, central servers hold the resources and respond to client requests. If the server goes down, the service is gone.</li>
+<li>In a <b>peer-to-peer</b> network, there is no center: every node can act as both client and server, and data can be located anywhere on any connected device.</li>
 </ul>
 <figure>
 <img src="img/networking-1.png" alt="Client-server network compared with a peer-to-peer network">
@@ -38,63 +41,64 @@
 
 <h2>CSMA/CD</h2>
 <ul>
-<li>Carrier Sense Multiple Access with Collision Detection.</li>
-<li>A network protocol for carrier transmission that operates in the Medium Access Control (MAC) layer.</li>
-<li>It senses (listens to) whether the shared channel is busy and defers transmission until the channel is free.</li>
+<li>Carrier Sense Multiple Access with Collision Detection. It is the medium-access (MAC-layer) protocol used by classic shared Ethernet.</li>
+<li><b>Carrier sense:</b> before sending, a station listens to the shared channel and waits until it is free.</li>
+<li><b>Collision detection:</b> if two stations start at the same time and their signals collide, both stop, wait a random amount of time, and try again.</li>
 </ul>
 
 <h2>TCP timers</h2>
-<p>TCP uses four timers to keep the connection reliable.</p>
+<p>TCP uses four timers to keep a connection reliable.</p>
 <ul>
-<li><b>Retransmission timer:</b> started every time a segment is sent. If no ACK arrives within the retransmission timeout (RTO), the segment is retransmitted.</li>
-<li><b>Persistent timer:</b> used to avoid a deadlock.</li>
-<li><b>Keep-alive timer:</b> prevents an established connection from sitting idle for a long time.</li>
-<li><b>Time-wait timer:</b> after a TCP connection is closed, data still in flight may arrive. This timer is used to discard duplicated (retransmitted) or delayed packets.</li>
+<li><b>Retransmission timer:</b> started whenever a segment is sent. If the acknowledgment does not arrive before the retransmission timeout (RTO) expires, the segment is sent again.</li>
+<li><b>Persistence timer:</b> prevents a deadlock where the receiver advertised a zero window, later reopened it, but the "window open" message was lost. The sender periodically probes so it does not wait forever.</li>
+<li><b>Keep-alive timer:</b> prevents an established but idle connection from sitting open indefinitely; if nothing is heard for a long time, a probe is sent and the connection is closed if there is no reply.</li>
+<li><b>Time-wait timer:</b> after a connection is closed, delayed or retransmitted packets from it might still arrive. The closing side waits for a while so that those stragglers can be safely discarded instead of confusing a new connection.</li>
 </ul>
 
 <h2>Ethernet</h2>
 <ul>
-<li>Uses packet switching.</li>
-<li>Packets sent on Ethernet are limited in size.</li>
-<li>Uses the CSMA/CD protocol to transmit messages.</li>
-<li>Uses buses with multiple masters.</li>
+<li>Uses packet switching: data is sent in frames rather than over a dedicated circuit.</li>
+<li>Frames have a maximum size (about 1500 bytes of payload).</li>
+<li>Classic shared Ethernet uses CSMA/CD to decide who may transmit.</li>
+<li>It is a bus with multiple masters: any station can initiate a transmission.</li>
 </ul>
 
 <h2>Address Resolution Protocol (ARP)</h2>
 <ul>
-<li>Determines the hardware (MAC) address for a given IP address.</li>
-<li>Translates the logical address assigned in software (IP address) into the actual physical address (MAC address).</li>
+<li>Finds the hardware (MAC) address that corresponds to a given IP address on the local network.</li>
+<li>IP addresses are logical addresses assigned in software; MAC addresses are the physical addresses burned into the network interface. ARP is the bridge between the two: "who has IP 10.0.0.5? tell me your MAC."</li>
 </ul>
 
 <h2>Parity bit</h2>
 <ul>
-<li>A bit added to detect whether an error occurred during transmission.</li>
-<li><b>Even parity:</b> the parity bit is chosen so that the total number of 1s is even.</li>
-<li>Examples (parity bit added at the front):
+<li>An extra bit added to a group of bits so that errors introduced during transmission can be detected.</li>
+<li>With <b>even parity</b>, the parity bit is chosen so that the total number of 1s (including the parity bit) is even. If a single bit flips in transit, the count becomes odd and the receiver knows something went wrong.</li>
+<li>Examples with the parity bit added at the front:
   <ul>
-  <li>0000000 → <b>0</b> 0000000</li>
-  <li>1010001 → <b>1</b> 1010001</li>
-  <li>1101001 → <b>0</b> 1101001</li>
-  <li>1111111 → <b>1</b> 1111111</li>
+  <li>0000000 (zero 1s) → <b>0</b> 0000000</li>
+  <li>1010001 (three 1s) → <b>1</b> 1010001</li>
+  <li>1101001 (four 1s) → <b>0</b> 1101001</li>
+  <li>1111111 (seven 1s) → <b>1</b> 1111111</li>
   </ul>
 </li>
+<li>Parity catches any odd number of flipped bits, but not an even number.</li>
 </ul>
 
-<h2>Datagram (UDP)</h2>
+<h2>Datagrams (UDP)</h2>
 <ul>
-<li>A datagram may be fragmented during routing.</li>
-<li>Datagrams are reassembled only at the destination.</li>
+<li>A datagram may be fragmented along the way if it is larger than a link can carry.</li>
+<li>The fragments are reassembled only at the final destination, not by intermediate routers.</li>
 </ul>
 
 <h2>Round-trip time (RTT)</h2>
 <ul>
-<li>The time it takes for a packet to make a round trip. The <code>ping</code> command reports the round-trip time of IP packets.</li>
+<li>The time from sending a packet until its reply comes back. The <code>ping</code> command measures it by sending an ICMP echo request and timing the echo reply.</li>
 </ul>
 
-<h2>TCP handshake</h2>
+<h2>TCP three-way handshake</h2>
 <ul>
-<li>Before an application using TCP/IP sends data, it establishes a session with the other computer to guarantee correct delivery.</li>
-<li>The correct order of the three-way handshake is SYN, SYN/ACK, ACK.</li>
+<li>Before any data is exchanged, TCP sets up a session so that both sides agree on initial sequence numbers and know the other is listening.</li>
+<li>The order is <b>SYN</b> (client asks to connect), <b>SYN/ACK</b> (server agrees and asks back), <b>ACK</b> (client confirms). After these three messages the connection is established.</li>
 </ul>
 
 <p class="topics">

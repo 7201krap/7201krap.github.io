@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Things to Remember – Ph.D. Qualifier Exam</title>
+<title>Things to Remember – Qual Exam Prep</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="notes.css">
@@ -11,117 +11,122 @@
 <body>
 <div class="page">
 
-<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Ph.D. Qualifier Exam</a> / Things to remember</p>
+<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Qual Exam Prep</a> / Things to remember</p>
 
 <h1>Things to remember</h1>
+<p class="subtitle">Facts that did not fit anywhere else: programming languages, digital logic, memory management, and a little discrete math.</p>
 
 <h2>Compiler vs. interpreter</h2>
 <table class="notes">
 <tr><th>Compiler</th><th>Interpreter</th></tr>
-<tr><td>Translates the entire source code in a single run</td><td>Translates the code line by line</td></tr>
-<tr><td>Compilation happens before execution</td><td>Translation and execution happen at the same time</td></tr>
-<tr><td>High memory usage</td><td>Low memory usage</td></tr>
-<tr><td>Reports all errors at once</td><td>Reports errors one line at a time</td></tr>
-<tr><td>Example: C / C++</td><td>Example: Python</td></tr>
+<tr><td>Translates the whole program in one pass, before it runs</td><td>Translates and runs the program one statement at a time</td></tr>
+<tr><td>Translation and execution are separate steps</td><td>Translation and execution are interleaved</td></tr>
+<tr><td>Higher memory use during compilation</td><td>Lower memory use</td></tr>
+<tr><td>Reports all errors at once, before running anything</td><td>Reports each error when it reaches that line</td></tr>
+<tr><td>Example: C, C++</td><td>Example: Python</td></tr>
 </table>
 
-<h2>Instance method vs. static method</h2>
+<h2>Instance methods vs. static methods</h2>
 <ul>
-<li>A static method is a method declared with the <code>static</code> keyword. It can be called without creating an object.</li>
-<li>A static method belongs to the class, while an instance method belongs to an instance of the class.</li>
-<li>An instance method can access instance methods and variables.</li>
-<li>An instance method can access static methods and variables.</li>
-<li>A static method can access static methods and variables.</li>
-<li>A static method cannot access instance methods and variables.</li>
+<li>A <b>static method</b> is declared with the <code>static</code> keyword and belongs to the class itself, so it can be called without creating an object.</li>
+<li>An <b>instance method</b> belongs to a particular object and is called on that object.</li>
+<li>Who can see what:
+  <ul>
+  <li>An instance method can use instance methods and variables (it has a <code>this</code>).</li>
+  <li>An instance method can also use static methods and variables.</li>
+  <li>A static method can use static methods and variables.</li>
+  <li>A static method <b>cannot</b> use instance methods or variables directly, because there is no particular object for them to belong to.</li>
+  </ul>
+</li>
 </ul>
 
 <h2>Call stack</h2>
 <ul>
-<li>A dynamic data structure maintained in RAM by the OS.</li>
-<li>Its purpose is to control the way procedures and functions call each other and pass parameters to each other.</li>
-<li>Local variables on the call stack are part of the root set in garbage collection.</li>
+<li>A region of RAM, managed by the runtime, that grows and shrinks as functions are called and return.</li>
+<li>It is what makes function calls work: it records where to return to and holds each call's parameters and local variables.</li>
+<li>For garbage collection, the local variables on the call stack are part of the <b>root set</b>: anything reachable from them is alive.</li>
 </ul>
 
-<h2>Procedure call</h2>
+<h2>What happens on a procedure call</h2>
 <ul>
-<li>Things that always happen on a procedure call:
+<li>Two things always happen:
   <ul>
-  <li>The program counter is updated.</li>
-  <li>The stack pointer is updated (the return address is saved on the stack).</li>
+  <li>The <b>program counter</b> changes to the address of the called procedure.</li>
+  <li>The <b>stack pointer</b> changes, because the return address (where to continue after the call) is pushed onto the stack.</li>
   </ul>
 </li>
-<li><b>Stack pointer register:</b> to push data onto or pop data from the stack, the machine must remember how far the stack currently extends. When the called function returns, the stack pointer is moved back by one stack frame.</li>
+<li>The <b>stack pointer register</b> keeps track of how far the stack currently extends, so that data can be pushed and popped. When a procedure returns, the stack pointer is moved back by one frame.</li>
 </ul>
 
 <h2>Stack frame</h2>
 <ul>
-<li>A stack frame is a frame of data that gets pushed onto the stack. In the case of the call stack, a stack frame represents a function call and its argument data.</li>
-<li>The function's return address is pushed first, then the arguments and space for local variables. Together they make the frame.</li>
-<li>The stack region of memory holds the local variables and parameters associated with function calls.</li>
-<li>The stack region is allocated when a function is called and released when the call completes.</li>
-<li>When a function is called, its parameters, its local variables, and the return address are stored on the stack.</li>
+<li>A stack frame is the block of data pushed onto the call stack for one function call.</li>
+<li>Typically the return address goes on first, then the arguments, then space for the local variables. Together they make up the frame.</li>
+<li>The frame is created when the function is called and discarded when the function returns, which is why local variables do not outlive the call.</li>
 </ul>
 
 <h2>Functional completeness</h2>
+<p>A set of logic gates is functionally complete if every Boolean function can be built from it. Each of the following sets is complete:</p>
 <ul>
 <li>{NOT, AND}</li>
 <li>{NOT, OR}</li>
 <li>{XOR, AND}</li>
 <li>{XOR, OR}</li>
+<li>Also, NAND alone and NOR alone are each complete.</li>
 </ul>
 
 <h2>Sequential vs. combinational circuits</h2>
 <ul>
-<li><b>Sequential circuit:</b> e.g. a counter (flip-flops with gates); stores memory or state.</li>
-<li><b>Combinational circuit:</b> arithmetic and logic operations, or direct control.</li>
-<li><b>Decoder:</b> takes an n-bit address and activates one of 2<sup>n</sup> individual output lines. It turns one input into many outputs, i.e. it sends data to the appropriate output line.</li>
-<li><b>Multiplexer:</b> selects one of 2<sup>n</sup> input lines and connects it to the output line. It outputs one of several inputs.</li>
+<li>A <b>combinational circuit</b>'s output depends only on its current inputs. Adders, comparators, decoders, and multiplexers are combinational; they do arithmetic, logic, and routing.</li>
+<li>A <b>sequential circuit</b> has memory: its output depends on the current inputs <em>and</em> on its state. Flip-flops, registers, and counters are sequential.</li>
+<li><b>Decoder:</b> takes an n-bit input and activates exactly one of 2<sup>n</sup> output lines. One input, many outputs; it routes a signal to the right line.</li>
+<li><b>Multiplexer (MUX):</b> the opposite. Takes 2<sup>n</sup> data inputs and an n-bit select signal, and passes the selected input through to the single output. Many inputs, one output.</li>
 </ul>
 
 <h2>DMA (direct memory access)</h2>
 <ul>
-<li>DMA lets an I/O device send data to or receive data from main memory directly, bypassing the CPU, to speed up memory operations.</li>
+<li>Lets an I/O device transfer data to or from main memory on its own, without the CPU copying every word. The CPU sets up the transfer, goes off to do other work, and gets an interrupt when the transfer is done.</li>
 </ul>
 
 <h2>Distributed systems</h2>
 <ul>
 <li>A collection of independent computers that appears to its users as a single system.</li>
-<li>Why do we need distributed systems? (1) Limited resources, (2) tolerance to failures, (3) convenient access to resources.</li>
+<li>Why bother: (1) one machine's resources are limited, (2) the system can keep working when one machine fails, (3) resources can be shared and reached conveniently from anywhere.</li>
 </ul>
 
 <h2>Symmetric difference</h2>
-<figure>
+<ul>
+<li>A △ B is the set of elements that are in A or in B but <em>not</em> in both. In the Venn diagram it is everything except the overlap.</li>
+</ul>
+<figure class="small">
 <img src="img/things-to-remember-1.png" alt="Venn diagram with the symmetric difference of two sets shaded">
-<figcaption>The symmetric difference of two sets (shaded). Source: <a href="https://en.wikipedia.org/wiki/Symmetric_difference">Wikipedia</a></figcaption>
+<figcaption>Source: <a href="https://en.wikipedia.org/wiki/Symmetric_difference">Wikipedia</a></figcaption>
 </figure>
 
 <h2>Static (lexical) scoping vs. dynamic scoping</h2>
 <ul>
-<li><b>Static (lexical) scoping:</b> a variable or function is resolved using the context of where it is defined.</li>
-<li><b>Dynamic scoping:</b> a variable or function is resolved using the context of where it is called. Follow the chain of calls and use the variable defined there; if something was defined earlier, it is simply overwritten.</li>
+<li>With <b>static</b> (lexical) scoping, a name refers to whatever it referred to where the function was <em>written</em>. You can resolve every name by reading the source code. Almost every modern language does this.</li>
+<li>With <b>dynamic</b> scoping, a name refers to the most recent binding on the <em>call stack</em>, i.e. it depends on who called the function. The same function can see different variables depending on where it was called from.</li>
 </ul>
 
 <h2>Direct vs. indirect representation</h2>
 <ul>
-<li><b>Direct representation</b> (stack storage): accessing a component is fast.</li>
-<li><b>Indirect representation</b> (heap storage): compilation is fast.</li>
-<li>When the storage size of some private component of a variable changes, indirect representation minimizes the number of source modules that must be recompiled.</li>
+<li><b>Direct representation</b>: the variable's data is stored inline, for example on the stack. Accessing a component is fast because there is no pointer to follow.</li>
+<li><b>Indirect representation</b>: the variable holds a pointer to data that lives elsewhere, for example on the heap. Slightly slower to access, but more flexible.</li>
+<li>One practical benefit of indirection: if the size of some private part of a data type changes, code that only holds a pointer does not need to be recompiled, so fewer source modules are affected.</li>
 </ul>
 
 <h2>Ripple-carry adder</h2>
 <ul>
-<li>Computation time for k bits: T<sub>c</sub> × (k − 1) + T<sub>s</sub>
-  <ul>
-  <li>T<sub>c</sub>: carry output delay</li>
-  <li>T<sub>s</sub>: sum output delay</li>
-  </ul>
-</li>
+<li>k full adders in a row, each waiting for the carry from the one before it. The carry "ripples" along the chain, so the total delay grows linearly with the number of bits.</li>
+<li>Delay for k bits: T<sub>c</sub> × (k − 1) + T<sub>s</sub>, where T<sub>c</sub> is the delay of one carry output and T<sub>s</sub> is the delay of the final sum output.</li>
 </ul>
 
 <h2>Semi-space copying collection</h2>
 <ul>
-<li>Assume a "from" space and a "to" space.</li>
-<li>Discard everything dead in the "from" space and copy only the live objects to the "to" space.</li>
+<li>The heap is split into two halves, "from-space" and "to-space". New objects are allocated in from-space by bumping a pointer.</li>
+<li>When from-space fills up, the collector starts at the roots and copies every reachable object into to-space, packed tightly together. Whatever is left behind in from-space is garbage and is simply abandoned. Then the two halves swap roles.</li>
+<li>Because live objects are copied contiguously, there is no fragmentation. The cost is that only half of the heap is usable at any time.</li>
 </ul>
 <figure>
 <img src="img/things-to-remember-2.png" alt="Slide illustrating semi-space copying: reachable objects are copied compactly into the second semi-space">
@@ -131,89 +136,80 @@
 <h2>Church–Turing thesis</h2>
 <p>Also called Church's thesis, Church's conjecture, or Turing's thesis.</p>
 <ul>
-<li>The thesis says that every computation that can be carried out by mechanical means can be carried out by some Turing machine.</li>
-<li>Every effective computation or algorithm can be executed on a Turing machine.</li>
-<li>The thesis does not have the form of a theorem and cannot be proved.</li>
+<li>It states that anything that can be computed by a mechanical procedure can be computed by a Turing machine. In other words, every effective algorithm can be run on a Turing machine.</li>
+<li>It is a <em>thesis</em>, not a theorem: "mechanical procedure" is an informal notion, so the claim cannot be proved, only supported by evidence.</li>
 </ul>
 
 <h2>Master theorem</h2>
 <ul>
-<li>The master theorem is a quick and simple way to compute the time complexity of recurrence relations (divide-and-conquer algorithms).</li>
+<li>A formula for solving recurrences of the form T(n) = a·T(n/b) + f(n), which is the shape that divide-and-conquer algorithms produce. Compare f(n) with n<sup>log<sub>b</sub> a</sup> and the theorem tells you the running time directly, without unrolling the recursion.</li>
 </ul>
 
 <h2>Raymond's tree-based algorithm</h2>
 <ul>
-<li>Raymond's tree-based algorithm guarantees freedom from deadlock, but starvation may occur.</li>
+<li>A token-based mutual exclusion algorithm for distributed systems: the processes are arranged in a tree and requests for the token travel toward whoever holds it.</li>
+<li>It guarantees freedom from deadlock, but starvation is possible: a process can keep being passed over.</li>
 </ul>
 
-<h2>Four principles of object-oriented programming</h2>
+<h2>The four principles of object-oriented programming</h2>
 <ul>
-<li><b>Encapsulation:</b> bundling data and behavior into a class.</li>
-<li><b>Inheritance.</b></li>
-<li><b>Abstraction:</b> defining common attributes and behavior reduces code duplication, sets up relationships between classes effectively, and makes maintenance easier.</li>
-<li><b>Polymorphism:</b> e.g. overloading.</li>
+<li><b>Encapsulation:</b> bundle data and the methods that operate on it into a class, and hide the internals.</li>
+<li><b>Inheritance:</b> a subclass reuses and extends the behavior of its superclass.</li>
+<li><b>Abstraction:</b> define common attributes and behavior once, in a general class or interface. This reduces duplication, makes the relationships between classes clearer, and makes maintenance easier.</li>
+<li><b>Polymorphism:</b> the same call can behave differently depending on the object. Method overloading and overriding are the usual examples.</li>
 </ul>
 
-<h2>Quantifiers</h2>
+<h2>Distributing quantifiers over "or"</h2>
 <ul>
-<li>(∀x P(x)) ∨ (∀x Q(x)) → ∀x (P(x) ∨ Q(x)). The reverse direction does not hold: you can combine, but you cannot split.</li>
-<li>(∃x P(x)) ∨ (∃x Q(x)) → ∃x (P(x) ∨ Q(x)). Again the reverse direction does not hold.</li>
+<li>(∀x P(x)) ∨ (∀x Q(x)) implies ∀x (P(x) ∨ Q(x)), but not the other way round. If everything is P or everything is Q, then certainly each thing is P or Q; but "each thing is P or Q" does not mean they are all the same one.</li>
+<li>(∃x P(x)) ∨ (∃x Q(x)) is actually equivalent to ∃x (P(x) ∨ Q(x)). The original note listed only the left-to-right direction; for the existential quantifier both directions hold.</li>
 </ul>
 
 <h2>1's complement vs. 2's complement</h2>
 <ul>
-<li><b>1's complement</b>
+<li><b>1's complement:</b> flip every bit. The 1's complement of 0011 is 1100.</li>
+<li><b>2's complement:</b> flip every bit, then add 1. This is how computers represent negative integers, and the most significant bit acts as the sign (0 = positive, 1 = negative).
   <ul>
-  <li>Method: invert every bit.</li>
-  <li>For example, the 1's complement of 0011 is 1100.</li>
+  <li>Example: to negate 0010 (decimal 2), flip the bits to get 1101, then add 1 to get 1110. So 1110 is −2 in 4-bit two's complement.</li>
+  <li>Check: 0010 + 1110 = 10000. The fifth bit is discarded because we only have 4 bits, leaving 0000. So 2 + (−2) = 0, as it should.</li>
   </ul>
 </li>
-<li><b>2's complement</b>
-  <ul>
-  <li>Method: invert every bit, then add 1 at the LSB.</li>
-  <li>The most significant bit (MSB) is used as the sign bit: 0 means positive, 1 means negative.</li>
-  <li>For example, the 2's complement of 0010 (decimal 2) is found as follows: 0010 → invert → 1101 → add 1 at the LSB → 1110 (decimal −2).</li>
-  <li>0010 + 1110 = 10000; the leading 1 is discarded because there were only 4 bits to begin with.</li>
-  </ul>
-</li>
+<li>The advantage of 2's complement over 1's complement is that there is only one zero and addition works with no special cases.</li>
 </ul>
 
-<h2>Logic</h2>
+<h2>Logic vocabulary</h2>
 <ul>
-<li><b>Tautology:</b> always true.</li>
-<li><b>Contradiction:</b> always false.</li>
-<li><b>Contingency:</b> sometimes true, sometimes false. A proposition that is neither true under every valuation (a tautology) nor false under every valuation (a contradiction).</li>
-<li><b>Satisfiability:</b> at least one valuation makes it true.</li>
+<li><b>Tautology:</b> true under every assignment of truth values (A ∨ ¬A).</li>
+<li><b>Contradiction:</b> false under every assignment (A ∧ ¬A).</li>
+<li><b>Contingency:</b> true under some assignments and false under others, i.e. neither a tautology nor a contradiction (A ∧ B).</li>
+<li><b>Satisfiable:</b> true under at least one assignment. Every tautology and every contingency is satisfiable; a contradiction is not.</li>
 </ul>
 
 <h2>Static allocation vs. stack allocation</h2>
 <ul>
-<li>Static allocation cannot create data structures dynamically (no recursive procedures).</li>
-<li>Stack allocation creates data structures and objects dynamically (recursive procedures are possible).</li>
+<li><b>Static allocation:</b> every variable gets a fixed address at compile time. Simple and fast, but data structures cannot be created dynamically and recursion is impossible, because each call would need its own copy of the locals.</li>
+<li><b>Stack allocation:</b> locals are allocated in a stack frame at call time. Each call gets fresh storage, so recursive procedures work.</li>
 </ul>
 
 <h2>Garbage collection</h2>
 <ul>
 <li><b>Reference counting</b>
   <ul>
-  <li>A smart pointer maintains a reference count internally and frees the object's memory when the count reaches 0.</li>
-  <li>Objects whose reference count is 0 can be considered no longer in use and become candidates for garbage collection.</li>
-  <li>Objects in a cycle that is unreachable from the GC roots are also candidates for collection.</li>
-  <li>Downsides: tracking the reference counts adds overhead, and cyclic references can cause memory leaks.</li>
+  <li>Each object keeps a count of how many references point to it. A smart pointer, for example, increments the count when it is copied and decrements it when it is destroyed; when the count reaches 0 the object is freed immediately.</li>
+  <li>Downsides: maintaining the counts adds overhead to every pointer assignment, and two objects that point at each other in a cycle never reach 0 even when nothing else can reach them, which leaks memory.</li>
   </ul>
 </li>
 <li><b>Mark and sweep</b>
   <ul>
-  <li>Starting from the GC roots, identify the reachable objects; clean up the unreachable ones so that their memory can be reused.</li>
-  <li><b>Mark:</b> starting from the GC roots, identify and record every reachable object.</li>
-  <li><b>Sweep:</b> free the memory of the objects not identified in the mark phase, i.e. the unreachable ones, so it can be reused.</li>
-  <li>It suffers from memory fragmentation.</li>
+  <li><b>Mark:</b> start from the GC roots (globals, the call stack, registers) and mark every object that can be reached by following pointers.</li>
+  <li><b>Sweep:</b> walk the whole heap and free everything that was not marked.</li>
+  <li>Handles cycles correctly, since an unreachable cycle is never marked. The downside is fragmentation: freed objects leave holes scattered through the heap.</li>
   </ul>
 </li>
 <li><b>Stop the world</b>
   <ul>
-  <li>When garbage collection runs, the application threads must pause, because live objects can only be identified accurately while the application threads are stopped.</li>
-  <li>This pausing of application threads is called "stop the world".</li>
+  <li>While the collector is figuring out which objects are alive, the application threads have to pause; otherwise they could change the object graph under the collector's feet.</li>
+  <li>That pause is called a "stop-the-world" pause, and keeping it short is one of the main goals of modern collector design.</li>
   </ul>
 </li>
 </ul>

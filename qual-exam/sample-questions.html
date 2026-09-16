@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sample Questions – Ph.D. Qualifier Exam</title>
+<title>Sample Questions – Qual Exam Prep</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="notes.css">
@@ -11,91 +11,106 @@
 <body>
 <div class="page">
 
-<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Ph.D. Qualifier Exam</a> / Sample questions</p>
+<p class="crumbs"><a href="../">Jin Hyun Park</a> / <a href="index.html">Qual Exam Prep</a> / Sample questions</p>
 
 <h1>Sample questions</h1>
-<p class="subtitle">Questions in the style of the exam, with short answers.</p>
+<p class="subtitle">Questions in the style of the exam. Each one comes with the answer and, more importantly, the reason.</p>
 
 <ol>
 
-<li>Which of the following in-place sorting algorithms needs the minimum number of swaps?
+<li><b>Which of the following in-place sorting algorithms needs the minimum number of swaps?</b>
 <ol type="1"><li>Insertion sort</li><li>Quick sort</li><li>Heap sort</li><li>Selection sort</li></ol>
-<p class="answer"><b>Answer:</b> (4) Selection sort. Selection sort is an in-place algorithm with the minimum number of swaps.</p>
+<p class="answer"><b>Answer: (4) Selection sort.</b><br>
+Selection sort finds the smallest remaining element and swaps it into place, so it makes at most n − 1 swaps in total. The other three can swap far more often (insertion sort, for example, shifts elements one position at a time).</p>
 </li>
 
-<li>A cache has an access time of 30 ns and main memory has an access time of 150 ns. What is the average access time of the CPU, assuming a hit ratio of 80%?
-<p class="answer"><b>Answer:</b> 60 ns. (30 × 0.8) + ((30 + 150) × 0.2) = 60.</p>
+<li><b>A cache has an access time of 30 ns and main memory has an access time of 150 ns. What is the average memory access time, assuming a hit ratio of 80%?</b>
+<p class="answer"><b>Answer: 60 ns.</b><br>
+On a hit (80% of the time) the cost is 30 ns. On a miss (20%) you pay for the cache lookup <em>and</em> the memory access, 30 + 150 = 180 ns. So the average is 0.8 × 30 + 0.2 × 180 = 24 + 36 = 60 ns.</p>
 </li>
 
-<li>What is the minimum number of two-input NAND gates needed to implement a two-input OR gate?
-<p class="answer"><b>Answer:</b> 3 NAND gates.</p>
+<li><b>What is the minimum number of two-input NAND gates needed to implement a two-input OR gate?</b>
+<p class="answer"><b>Answer: 3.</b><br>
+By De Morgan's law, A + B = ¬(¬A · ¬B). You need one NAND to make ¬A (tie both inputs to A), one to make ¬B, and one NAND of those two results.</p>
 </li>
 
-<li>At low multiprogramming levels, throughput increases as the multiprogramming level increases. This is best explained by the fact that, as the multiprogramming level increases,
-<p class="answer"><b>Answer:</b> the potential for concurrent activity among system resources increases.</p>
+<li><b>At low multiprogramming levels, throughput increases as the multiprogramming level increases. Why?</b>
+<p class="answer"><b>Answer:</b> because the potential for concurrent activity among system resources increases.<br>
+With more processes in memory, while one waits for I/O another can use the CPU, so the hardware sits idle less often.</p>
 </li>
 
-<li>At intermediate multiprogramming levels, the rate of increase of throughput with the multiprogramming level decreases. This is best explained by the fact that, as the multiprogramming level increases,
-<p class="answer"><b>Answer:</b> some system resource begins to saturate (becomes 100% utilized).</p>
+<li><b>At intermediate multiprogramming levels, the rate at which throughput increases begins to fall. Why?</b>
+<p class="answer"><b>Answer:</b> because some system resource begins to saturate, i.e. reaches 100% utilization.<br>
+Once the CPU (or the disk, or memory) is already busy all the time, adding more processes cannot add more work per second.</p>
 </li>
 
-<li>Let A and B be two sets of words (strings) over Σ*, for some alphabet Σ. Suppose B is a subset of A. Which of the following must always be true?
+<li><b>Let A and B be two sets of strings over an alphabet Σ, and suppose B ⊆ A. Which of the following must be true?</b>
 <ol type="I"><li>If A is finite, then B is finite.</li><li>If A is regular, then B is regular.</li><li>If A is context-free, then B is context-free.</li></ol>
-<p class="answer"><b>Answer:</b> I is true; II and III are false.</p>
+<p class="answer"><b>Answer: only I.</b><br>
+A subset of a finite set is finite, so I holds. But II and III fail: Σ* is regular, and <em>every</em> language is a subset of Σ*, including non-regular and non-context-free ones. Being a subset says nothing about the complexity of the language.</p>
 </li>
 
-<li>Two processors, M-5 and M-7, implement the same instruction set. M-5 uses a 5-stage pipeline and a clock cycle of 10 ns. M-7 uses a 7-stage pipeline and a clock cycle of 7.5 ns. Which of the following is (are) true?
-<ol type="I"><li>M-7's pipeline has better maximum throughput than M-5's pipeline.</li><li>The latency of a single instruction is shorter on M-7's pipeline than on M-5's.</li><li>Programs executing on M-7 will always run faster than programs executing on M-5.</li></ol>
-<p class="answer"><b>Answer:</b> I is true; II and III are false.<br>
-I: throughput depends only on the clock cycle. II: latency is (number of stages) × (longest stage time), so M-5's latency is 5 × (longest stage) and M-7's is 7 × (longest stage). III: obviously false.</p>
+<li><b>Two processors, M-5 and M-7, implement the same instruction set. M-5 uses a 5-stage pipeline with a 10 ns clock cycle. M-7 uses a 7-stage pipeline with a 7.5 ns clock cycle. Which of the following is (are) true?</b>
+<ol type="I"><li>M-7's pipeline has better maximum throughput than M-5's.</li><li>The latency of a single instruction is shorter on M-7 than on M-5.</li><li>Programs on M-7 will always run faster than on M-5.</li></ol>
+<p class="answer"><b>Answer: only I.</b><br>
+I: in a pipeline, one instruction finishes per clock cycle at best, so throughput is set by the clock cycle alone, and 7.5 ns is shorter than 10 ns. II: latency is (number of stages) × (cycle time): 5 × 10 = 50 ns on M-5 versus 7 × 7.5 = 52.5 ns on M-7, so M-7 is actually slower per instruction. III: a deeper pipeline suffers more from hazards and branch mispredictions, so "always" is false.</p>
 </li>
 
-<li>An aid to determining whether deadlock has occurred is:
-<p class="answer"><b>Answer:</b> a resource allocation graph.</p>
+<li><b>What tool helps determine whether a deadlock has occurred?</b>
+<p class="answer"><b>Answer:</b> a resource allocation graph.<br>
+Processes and resources are nodes; requests and assignments are edges. A cycle in the graph is a necessary condition for deadlock (and a sufficient one if each resource has a single instance).</p>
 </li>
 
-<li>Which of the following is (are) true about virtual memory systems that use pages?
-<ol type="I"><li>The virtual address space can be larger than the amount of physical memory.</li><li>Programs must be resident in main memory throughout their execution.</li><li>Pages correspond to semantic characteristics of the program.</li></ol>
-<p class="answer"><b>Answer:</b> I is true; II and III are false.</p>
+<li><b>Which of the following is (are) true about virtual memory systems that use paging?</b>
+<ol type="I"><li>The virtual address space can be larger than physical memory.</li><li>Programs must be resident in main memory throughout their execution.</li><li>Pages correspond to semantic characteristics of the program.</li></ol>
+<p class="answer"><b>Answer: only I.</b><br>
+The whole point of virtual memory is that a process can address more than what physically fits (I), because pages can live on disk and be brought in on demand (so II is false). Pages are fixed-size chunks that ignore program structure; it is <em>segments</em> that follow the program's logical units (so III is false).</p>
 </li>
 
-<li>Which of the following is an efficient method of cache updating?
+<li><b>Which of the following is an efficient method of keeping caches up to date?</b>
 <ol type="1"><li>Snoopy writes</li><li>Write through</li><li>Write within</li><li>Buffered write</li></ol>
-<p class="answer"><b>Answer:</b> (1). The ability of cache controllers to observe activity on the bus and take appropriate action is called the snoopy-cache technique. For performance reasons it is important that snooping does not interfere with the normal operation of a processor and its cache.</p>
+<p class="answer"><b>Answer: (1).</b><br>
+In a snoopy cache, each cache controller watches ("snoops on") the shared bus and reacts when another processor writes to an address it holds a copy of. Done properly, this keeps caches coherent without slowing down the normal operation of the processor.</p>
 </li>
 
-<li>Increasing the number of buffers is likely to do which of the following?
+<li><b>Increasing the number of buffers is likely to do which of the following?</b>
 <ol type="I"><li>Increase the rate at which requests are satisfied (throughput).</li><li>Change the likelihood of deadlock.</li><li>Change the ease of achieving a correct implementation.</li></ol>
-<p class="answer"><b>Answer:</b> I is true; II and III are false.</p>
+<p class="answer"><b>Answer: only I.</b><br>
+More buffers let producers and consumers get further out of step with each other, which improves throughput. The buffer count does not change the logic of the program, so neither deadlock behavior nor correctness is affected.</p>
 </li>
 
-<li>How many page faults can a single load word (<code>lw</code>) instruction cause, if page tables are not locked in memory and may be swapped to disk?
-<p class="answer"><b>Answer:</b> at most 2 per phase. In the worst case the page table itself is not in memory, so bringing it in causes one page fault. The page containing the word may then also be absent, causing a second page fault. This can happen in both the fetch and the execute phase.</p>
+<li><b>Page tables are not locked in memory and may be swapped to disk. How many page faults can a single load word (<code>lw</code>) instruction cause?</b>
+<p class="answer"><b>Answer: up to 2 per memory reference.</b><br>
+To translate the address you first need the page table. In the worst case the page table itself is on disk: one page fault. Then the page holding the data may also be on disk: a second page fault. The same reasoning applies to fetching the instruction itself, so an <code>lw</code> can fault twice in the fetch phase and twice again in the execute phase.</p>
 </li>
 
-<li>If L1 is a decidable language and L2 is an undecidable language, then L1 ∪ L2 is
-<p class="answer"><b>Answer:</b> infinite, but possibly decidable and possibly undecidable. A decidable language can be finite or infinite; an undecidable language is always infinite.</p>
+<li><b>If L1 is a decidable language and L2 is an undecidable language, what can be said about L1 ∪ L2?</b>
+<p class="answer"><b>Answer:</b> it is infinite, but it may be decidable or undecidable.<br>
+Every undecidable language is infinite (a finite language is always decidable, since you can list its members), so the union is infinite. Whether the union is decidable depends on the particular languages: for example, if L1 = Σ*, the union is Σ*, which is decidable.</p>
 </li>
 
-<li>Let G = (V, E) be a connected, undirected graph, and let a and b be two distinct vertices in V. Let P1 be the problem of finding a shortest path between a and b, and P2 the problem of finding a longest simple path between a and b.
-<p class="answer"><b>Answer:</b> P1 can be solved in polynomial time, but P2 is not known to be solvable in polynomial time (it is NP-complete). The exception is a DAG: the longest path in a DAG can be found in linear time.</p>
+<li><b>Let G = (V, E) be a connected, undirected graph, and let a and b be two distinct vertices. P1 is the problem of finding a shortest path between a and b; P2 is the problem of finding a longest simple path between a and b. What is known about them?</b>
+<p class="answer"><b>Answer:</b> P1 can be solved in polynomial time (BFS or Dijkstra), but P2 is NP-complete and is not known to be solvable in polynomial time.<br>
+The one exception worth remembering: on a directed acyclic graph, the longest path can be found in linear time by processing the vertices in topological order.</p>
 </li>
 
-<li>One garbage collection algorithm is semispace copying collection. Which of the following characteristics apply to it?
+<li><b>Which of the following apply to semispace copying garbage collection?</b>
 <ol type="I"><li>Collects dead objects that reference each other.</li><li>Incurs overhead on every assignment to a reference variable.</li><li>Avoids fragmentation.</li></ol>
-<p class="answer"><b>Answer:</b> I and III are true; II is false.</p>
+<p class="answer"><b>Answer: I and III.</b><br>
+A copying collector starts from the roots and copies every reachable object to the other half of the heap. A cycle of dead objects is unreachable, so it is simply never copied (I). The copied objects end up packed together, so there is no fragmentation (III). Nothing happens on assignment; that is the cost of <em>reference counting</em>, not of copying collection (II is false).</p>
 </li>
 
-<li>Of the following problems on a given undirected graph G, which is currently known to be solvable in polynomial time?
-<ol type="1"><li>Finding the longest simple cycle in G</li><li>Finding the shortest cycle in G</li><li>Finding all spanning trees of G</li><li>Finding the largest clique in G</li><li>Finding a node coloring of G (adjacent nodes receive distinct colors) with the minimum number of colors</li></ol>
-<p class="answer"><b>Answer:</b> (2).</p>
+<li><b>Of the following problems on an undirected graph G, which is known to be solvable in polynomial time?</b>
+<ol type="1"><li>Finding the longest simple cycle in G</li><li>Finding the shortest cycle in G</li><li>Finding all spanning trees of G</li><li>Finding the largest clique in G</li><li>Finding a proper node coloring of G with the minimum number of colors</li></ol>
+<p class="answer"><b>Answer: (2).</b><br>
+The shortest cycle (the girth) can be found with a BFS from each vertex. Longest cycle, maximum clique, and minimum coloring are all NP-hard. Listing all spanning trees is not hard per tree, but a graph can have exponentially many of them, so the output alone can be exponential in size.</p>
 </li>
 
-<li>True or false?
+<li><b>True or false?</b>
 <ul>
-<li>Finding the shortest cycle in an undirected graph G is solvable in polynomial time. <b>True.</b></li>
+<li>Finding the shortest cycle in an undirected graph can be done in polynomial time. <b>True.</b></li>
 <li>The purpose of a compiler is to translate source code into machine code. <b>True.</b></li>
-<li>Every finite language is decidable. <b>True.</b></li>
+<li>Every finite language is decidable. <b>True.</b> A finite list can always be checked.</li>
 <li>The halting problem is undecidable. <b>True.</b></li>
 </ul>
 </li>
