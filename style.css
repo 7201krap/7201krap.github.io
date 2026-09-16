@@ -122,12 +122,15 @@ table.cv td:first-child {
 .proj-body h3 {
   font-size: 17px;
   font-weight: bold;
-  margin: 0 0 4px;
+  margin: 0 0 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .proj-meta {
   font-size: 14px;
   color: #555;
-  margin-bottom: 6px;
+  margin: 8px 0 0;
 }
 .proj-body p { margin-bottom: 6px; }
 .proj-links { font-size: 15px; }
@@ -206,6 +209,7 @@ ul.projects li {
   .proj { flex-direction: column; gap: 10px; }
   .proj-thumb { flex-basis: auto; }
   .proj-thumb img { width: 100%; height: auto; max-height: 220px; }
+  .proj-body h3 { white-space: normal; }
   .hero { margin: -24px -16px 8px; padding: 24px 16px 16px; border-radius: 0; }
   table.header,
   table.header tr,
