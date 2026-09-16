@@ -32,8 +32,21 @@ h1 {
 h2 {
   font-size: 22px;
   font-weight: normal;
-  margin: 36px 0 12px;
+  margin: 0 0 12px;
   color: #7a1c2b;
+}
+
+/* sections with alternating background */
+.sec {
+  padding: 22px 24px 14px;
+  margin: 0 -24px;
+  border-radius: 6px;
+}
+.sec:nth-of-type(even) {
+  background: #f7f4ee;
+}
+.sec + .sec {
+  margin-top: 8px;
 }
 
 h3 {
@@ -141,6 +154,7 @@ ul.projects li {
 @media (max-width: 600px) {
   body { font-size: 16px; }
   .page { padding: 24px 16px 40px; }
+  .sec { margin: 0 -16px; padding: 18px 16px 10px; border-radius: 0; }
   table.header,
   table.header tr,
   table.header td { display: block; width: 100%; }
