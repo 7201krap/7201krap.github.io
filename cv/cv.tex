@@ -5,7 +5,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[sups,scaled=1.02]{XCharter}
-\usepackage[margin=0.7in,top=0.6in,bottom=0.65in]{geometry}
+\usepackage[margin=0.7in,top=0.55in,bottom=0.6in]{geometry}
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{xcolor}
@@ -17,11 +17,11 @@
 \usepackage{lastpage}
 \usepackage{needspace}
 
-\definecolor{maroon}{HTML}{7A1C2B}
+\definecolor{accent}{HTML}{1F4E79}
 \definecolor{gray}{HTML}{555555}
 \definecolor{rule}{HTML}{C9C4BA}
 
-\hypersetup{colorlinks=true, urlcolor=maroon, linkcolor=maroon}
+\hypersetup{colorlinks=true, urlcolor=accent, linkcolor=accent}
 \urlstyle{same}
 
 \pagestyle{fancy}
@@ -31,11 +31,9 @@
 \fancyfoot[C]{\small\color{gray}\thepage\ / \pageref{LastPage}}
 \fancyfoot[R]{\small\color{gray}Updated September 2026}
 
-% Section headings: small caps, maroon, thin rule
-\titleformat{\section}{\color{maroon}\large\scshape\bfseries}{}{0pt}{}[{\color{rule}\titlerule[0.6pt]}]
-\titlespacing*{\section}{0pt}{9pt}{4pt}
-\let\oldsection\section
-\renewcommand{\section}[1]{\needspace{5\baselineskip}\oldsection{#1}}
+% Section headings: small caps, accent, thin rule
+\titleformat{\section}{\color{accent}\large\scshape\bfseries}{}{0pt}{}[{\color{rule}\titlerule[0.6pt]}]
+\titlespacing*{\section}{0pt}{8pt}{3pt}
 
 \setlist[itemize]{leftmargin=1.25em, itemsep=1pt, topsep=1pt, parsep=0pt, label=\textcolor{gray}{\textbullet}}
 
@@ -61,7 +59,7 @@
 \newcommand{\pub}[5]{%
   \par\vspace{4pt}%
   \begin{tabularx}{\textwidth}{@{}p{2.9em}@{}X@{}}
-    \textcolor{maroon}{[#1]} & #2. \emph{#3}. #4.\ifx\\#5\\\else\ #5\fi\\
+    \textcolor{accent}{[#1]} & #2. \emph{#3}. #4.\ifx\\#5\\\else\ #5\fi\\
   \end{tabularx}}
 
 \newcommand{\me}{\textbf{Jin Hyun Park}}
@@ -94,7 +92,7 @@ and learning-based control for physical systems.
       {Texas A\&M University, College Station, TX, USA \quad\textcolor{gray}{Advisor: Yoonsuck Choe}}
 
 \entry{B.Sc. in Computer Science, First Class Honours}{Sep 2017 -- Jul 2021}
-      {University of Bristol, Bristol, UK \quad\textcolor{gray}{Supervisors: Rui Ponte Costa, Cian O'Donnell}}
+      {University of Bristol, Bristol, UK \quad\textcolor{gray}{Supervisor: Rui Ponte Costa}}
 
 % ---------------- Publications ----------------
 \section{Publications}
@@ -132,9 +130,6 @@ and learning-based control for physical systems.
 % ---------------- Research Experience ----------------
 \section{Research Experience}
 
-\entry{Physical AI Ph.D. Fellow}{Feb 2026 -- Present}
-      {Doosan Corporation, Seoul, Korea}
-
 \entry{Graduate Research Assistant}{Aug 2022 -- Present}
       {Brain Networks Lab, Texas A\&M University \quad\textcolor{gray}{Advisor: Yoonsuck Choe}}
 \begin{itemize}
@@ -153,6 +148,10 @@ and learning-based control for physical systems.
 % ---------------- Industry Experience ----------------
 \section{Industry Experience}
 
+\entry{Physical AI Ph.D. Fellow}{Feb 2026 -- Present}
+      {Doosan Corporation, Seoul, Korea}
+
+\needspace{6\baselineskip}
 \entry{Machine Learning Engineer Intern}{May -- Aug 2023; Jul -- Aug 2025}
       {Machine Learning Team, Tilda Corp., Seoul, Korea}
 \begin{itemize}
