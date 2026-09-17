@@ -277,11 +277,13 @@ ul.projects li {
 
 @media (max-width: 700px) {
   body { display: block; }
-  .side { position: static; width: auto; height: auto; padding: 12px 16px 12px 56px; }
+  .side { position: static; width: auto; height: 56px; min-height: 56px; display: flex; align-items: center; padding: 0 16px 0 62px; overflow-x: auto; }
   .side-collapsed .side { display: none; }
   .side-name { display: none; }
-  .side nav { display: flex; gap: 18px; }
-  .side nav a { display: inline-block; padding: 4px 0; font-size: 15px; }
+  .side nav { display: flex; align-items: center; gap: 18px; white-space: nowrap; }
+  .side nav a { display: inline-block; padding: 0; font-size: 15px; line-height: 1; }
+  .side-toggle { top: 11px; left: 14px; }
+  .side-collapsed .page { padding-top: 64px; }
 }
 
 @media (max-width: 600px) {
