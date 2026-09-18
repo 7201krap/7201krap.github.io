@@ -98,7 +98,7 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0 20px; }
 .profile.no-photo .profile-photo { display: none; }
 .profile-photo img { display: block; width: 100%; height: auto; border-radius: 4px; }
 .role { color: var(--muted); font-size: 15.5px; margin-bottom: 26px; }
-.intro { font-size: 21px; line-height: 1.45; font-style: italic; margin-bottom: 20px; }
+.intro { font-size: 17px; font-style: italic; color: var(--muted); margin-bottom: 18px; }
 .contact { margin-top: 24px; line-height: 1.9; }
 .sep { color: var(--line); margin: 0 3px; }
 
@@ -140,7 +140,6 @@ table.pubs td:first-child { width: 46px; padding-right: 10px; color: var(--accen
   .topbar nav { gap: 16px; font-size: 15px; }
   .page { padding: 40px 18px 56px; }
   h1 { font-size: 33px; }
-  .intro { font-size: 19px; }
   .profile { grid-template-columns: 1fr; gap: 24px; margin-bottom: 48px; }
   .profile-photo { order: -1; }
   .profile-photo img { max-width: 220px; }
