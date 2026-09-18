@@ -16,18 +16,10 @@
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 \usepackage{needspace}
-\usepackage{pifont}
 
 \definecolor{accent}{HTML}{1F4E79}
 \definecolor{gray}{HTML}{555555}
 \definecolor{rule}{HTML}{C9C4BA}
-\definecolor{thA}{HTML}{8A1F2D}
-\definecolor{thB}{HTML}{1F4E79}
-\definecolor{thC}{HTML}{2F6B3F}
-% Research-theme marks used to link publications and experience to themes
-\newcommand{\tA}{{\footnotesize\textcolor{thA}{\ding{115}}}}% triangle: brain-inspired neural networks
-\newcommand{\tB}{{\footnotesize\textcolor{thB}{\ding{110}}}}% square: applied AI
-\newcommand{\tC}{{\footnotesize\textcolor{thC}{\ding{108}}}}% circle: language models and NLP
 
 \hypersetup{colorlinks=true, urlcolor=accent, linkcolor=accent}
 \urlstyle{same}
@@ -88,13 +80,10 @@
 \end{center}
 
 % ---------------- Research Interests ----------------
-\section{Research Themes}
-{\small\color{gray}Marks link each theme to the publications and positions below.\par}\vspace{2pt}
-\begin{tabularx}{\textwidth}{@{}p{1.2em}@{}X@{}}
-  \tA & \textbf{Brain-inspired neural networks.} Visual-cortex circuitry in CNNs, saliency and sparsity in neural codes, neuroevolution (NEAT) of predictive behavior. [A2, W1, J1, A1] \\
-  \tC & \textbf{Language models and NLP.} LLM evaluation, retrieval-augmented generation (RAG), chain-of-thought reasoning. [C2, C1] \\
-  \tB & \textbf{Applied AI.} Learning-based control for smart floor heating, physical AI, neural and meta-heuristic optimization, forecasting. \\
-\end{tabularx}
+\section{Research Interests}
+Machine learning, computational neuroscience, and natural language processing. In particular,
+biologically inspired neural network architectures, the evolutionary origins of predictive behavior,
+and learning-based control for physical systems.
 
 % ---------------- Education ----------------
 \section{Education}
@@ -109,31 +98,31 @@
 \section{Publications}
 {\small\color{gray}C: conference, J: journal, W: workshop, A: arXiv preprint. * denotes equal contribution.\par}
 
-\pub{C2}{\tC\ Soha Lee, Soojin Lee, Heesung Yang, Hyunju Song, Hyunji Lee, Jinsan An, Jeongwan Shin, \me, Jun Lee, Hyeyoung Park, Kilim Nam}
+\pub{C2}{Soha Lee, Soojin Lee, Heesung Yang, Hyunju Song, Hyunji Lee, Jinsan An, Jeongwan Shin, \me, Jun Lee, Hyeyoung Park, Kilim Nam}
     {KoNeoBench: A Curated Evaluation Dataset for LLM Understanding of Korean Neologisms}
     {Findings of EMNLP, 2026}{}
 
-\pub{C1}{\tC\ Seyyed Ali Ayati*, \me*, Yichen Cai, Marcus Botacin}
+\pub{C1}{Seyyed Ali Ayati*, \me*, Yichen Cai, Marcus Botacin}
     {Making Acoustic Side-Channel Attacks on Noisy Keyboards Viable with LLM-Assisted Spectrograms' ``Typo'' Correction}
     {19th USENIX Workshop on Offensive Technologies (WOOT), 2025}
     {\href{https://arxiv.org/abs/2504.11622}{arXiv:2504.11622}}
 
-\pub{J1}{\tA\ William Kang, Chris Anand, \me, Yoonsuck Choe}
+\pub{J1}{William Kang, Chris Anand, \me, Yoonsuck Choe}
     {Evolutionary Factors Contributing to the Emergence of Prediction}
     {Adaptive Behavior, 2025}
     {\href{https://journals.sagepub.com/doi/10.1177/10597123251364746}{doi:10.1177/10597123251364746}}
 
-\pub{W1}{\tA\ Alex Alvarez*, \me*, Yoonsuck Choe}
+\pub{W1}{Alex Alvarez*, \me*, Yoonsuck Choe}
     {Saliency Thresholds in Neural Code and its Relation to the Power-Law, Gaussian, and Lambert W Function}
     {NeurIPS Workshop on Symmetry and Geometry in Neural Representations (NeurReps), 2025}
     {\href{https://openreview.net/forum?id=cjo2oadaRz}{OpenReview}}
 
-\pub{A2}{\tA\ \me, Cheng Zhang, Yoonsuck Choe}
+\pub{A2}{\me, Cheng Zhang, Yoonsuck Choe}
     {Incorporating Visual Cortical Lateral Connection Properties into CNN: Recurrent Activation and Excitatory-Inhibitory Separation}
     {arXiv preprint, 2025}
     {\href{https://arxiv.org/abs/2509.15460}{arXiv:2509.15460}}
 
-\pub{A1}{\tA\ \me}
+\pub{A1}{\me}
     {Representations Learnt by SGD and Adaptive Learning Rules: Conditions that Vary Sparsity and Selectivity in Neural Networks}
     {arXiv preprint, 2022}
     {\href{https://arxiv.org/abs/2201.11653}{arXiv:2201.11653}}
@@ -144,12 +133,12 @@
 \entry{Graduate Research Assistant}{Aug 2022 -- Present}
       {Brain Networks Lab, Texas A\&M University \quad\textcolor{gray}{Advisor: Yoonsuck Choe}}
 \begin{itemize}
-  \item \tA\ Biologically inspired neural networks: incorporated visual-cortex lateral connectivity (recurrent activation, excitatory--inhibitory separation) into CNNs [A2] and analyzed saliency thresholds in neural codes [W1].
-  \item \tA\ Evolution of prediction: studied the evolutionary factors that give rise to predictive behavior in simulated agents [J1].
-  \item \tB\ Learning-based control: developed an AI-driven smart thermostat for floor-heating systems.
+  \item Biologically inspired neural networks: incorporated visual-cortex lateral connectivity (recurrent activation, excitatory--inhibitory separation) into CNNs [A2] and analyzed saliency thresholds in neural codes [W1].
+  \item Evolution of prediction: studied the evolutionary factors that give rise to predictive behavior in simulated agents [J1].
+  \item Learning-based control: developed an AI-driven smart thermostat for floor-heating systems.
 \end{itemize}
 
-\entry{Research Assistant \tC}{Jan 2022 -- Jul 2022}
+\entry{Research Assistant}{Jan 2022 -- Jul 2022}
       {Multimodal Language and Cognition Lab, Kyungpook National University, Daegu, Korea}
 \begin{itemize}
   \item Research on classical NLP algorithms and large language models.
@@ -159,24 +148,24 @@
 % ---------------- Industry Experience ----------------
 \section{Industry Experience}
 
-\entry{Physical AI Ph.D. Fellow \tB}{Feb 2026 -- Present}
+\entry{Physical AI Ph.D. Fellow}{Feb 2026 -- Present}
       {Doosan Corporation, Seoul, Korea}
 
 \needspace{6\baselineskip}
-\entry{Machine Learning Engineer Intern \tB}{May -- Aug 2023; Jul -- Aug 2025}
+\entry{Machine Learning Engineer Intern}{May -- Aug 2023; Jul -- Aug 2025}
       {Machine Learning Team, Tilda Corp., Seoul, Korea}
 \begin{itemize}
   \item 2025: Meta-heuristic and neural methods for vehicle routing, multi-agent path finding, and time-series forecasting.
   \item 2023: Machine learning solutions based on a neural-network-guided genetic algorithm.
 \end{itemize}
 
-\entry{Machine Learning Engineer Intern \tC}{Jul -- Aug 2024}
+\entry{Machine Learning Engineer Intern}{Jul -- Aug 2024}
       {AI Service Part, Digital Innovation Team, Samsung Life Insurance, Seoul, Korea}
 \begin{itemize}
   \item Built an automatic PDF parsing pipeline and a retrieval-augmented (RAG) search engine for insurance documents and policy retrieval.
 \end{itemize}
 
-\entry{Machine Learning Engineer Intern \tB}{May -- Jul 2024}
+\entry{Machine Learning Engineer Intern}{May -- Jul 2024}
       {AI Prediction Tech Team, Data Science Lab, LG Uplus, Seoul, Korea}
 \begin{itemize}
   \item Ensemble and transformer models for identifying outbound roaming travelers.
