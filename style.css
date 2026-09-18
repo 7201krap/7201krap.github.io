@@ -119,6 +119,8 @@ table.pubs td:first-child { width: 46px; padding-right: 10px; color: var(--accen
 
 /* ---------- mini projects ---------- */
 .proj { display: flex; gap: 20px; align-items: flex-start; margin: 0 0 28px; }
+.proj + .proj { border-top: 1px solid var(--line); padding-top: 28px; }
+.proj:first-of-type { border-top: 1px solid var(--line); padding-top: 28px; }
 .proj-thumb { flex: 0 0 200px; border-bottom: none; }
 .proj-thumb img {
   display: block;
