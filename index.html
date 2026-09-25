@@ -8,6 +8,8 @@
 <link rel="canonical" href="https://jinhyunpark.com/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
+<script>try{if(localStorage.getItem("site-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<script defer src="theme.js"></script>
 </head>
 <body>
 
@@ -17,6 +19,7 @@
     <a href="index.html" class="active">Home</a>
     <a href="projects.html">Mini Projects</a>
     <a href="qual-exam/index.html">Qual Exam Prep</a>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false"><span class="t-dark">Dark</span><span class="t-light">Light</span></button>
   </nav>
 </header>
 <div class="page">

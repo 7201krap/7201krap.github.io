@@ -7,6 +7,8 @@
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="notes.css">
+<script>try{if(localStorage.getItem("site-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<script defer src="../theme.js"></script>
 </head>
 <body>
 <header class="topbar">
@@ -15,6 +17,7 @@
     <a href="../index.html">Home</a>
     <a href="../projects.html">Mini Projects</a>
     <a href="../qual-exam/index.html" class="active">Qual Exam Prep</a>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false"><span class="t-dark">Dark</span><span class="t-light">Light</span></button>
   </nav>
 </header>
 <div class="page">

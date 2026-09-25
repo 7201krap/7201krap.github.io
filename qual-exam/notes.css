@@ -2,18 +2,18 @@
 
 .crumbs {
   font-size: 15px;
-  color: #555;
+  color: var(--muted);
   margin-bottom: 20px;
 }
 .crumbs a { border-bottom: none; }
-.crumbs a:hover { border-bottom: 1px solid #7a1c2b; }
+.crumbs a:hover { border-bottom: 1px solid var(--accent); }
 
 h1 {
   font-size: 28px;
   margin-bottom: 6px;
 }
 .subtitle {
-  color: #555;
+  color: var(--muted);
   margin-bottom: 24px;
 }
 
@@ -21,7 +21,7 @@ h2 {
   font-size: 20px;
   margin: 32px 0 10px;
   padding-bottom: 4px;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid var(--line);
 }
 h3 {
   font-size: 17px;
@@ -46,10 +46,11 @@ figure img {
   max-width: min(100%, 620px);
   height: auto;
   padding: 10px;
-  background: #fff;
-  border: 1px solid #e3e3e3;
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  filter: var(--figure-filter);
 }
 figure.wide img { max-width: 100%; }
 figure.small img { max-width: min(100%, 420px); }
@@ -67,11 +68,11 @@ figure.pair img {
 figure.pair figcaption { flex-basis: 100%; }
 figcaption {
   font-size: 14px;
-  color: #666;
+  color: var(--muted);
   margin-top: 8px;
   line-height: 1.4;
 }
-figcaption a { color: #7a1c2b; }
+figcaption a { color: var(--accent); }
 @media (max-width: 600px) {
   figure.pair img { max-width: 100%; }
 }
@@ -79,7 +80,7 @@ figcaption a { color: #7a1c2b; }
 code {
   font-family: Menlo, Consolas, monospace;
   font-size: 15px;
-  background: #f4f4f4;
+  background: var(--fill);
   padding: 0 4px;
 }
 
@@ -90,22 +91,22 @@ table.notes {
   font-size: 16px;
 }
 table.notes th, table.notes td {
-  border: 1px solid #ddd;
+  border: 1px solid var(--line);
   padding: 5px 8px;
   vertical-align: top;
   text-align: left;
 }
-table.notes th { background: #f6f6f6; font-weight: bold; }
+table.notes th { background: var(--fill); font-weight: bold; }
 
 .answer { margin: 4px 0 14px; }
-.answer b { color: #7a1c2b; }
+.answer b { color: var(--accent); }
 
 .topics {
   margin-top: 40px;
   padding-top: 16px;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--line);
   font-size: 15px;
-  color: #555;
+  color: var(--muted);
 }
 .topics a { border-bottom: none; }
-.topics a:hover { border-bottom: 1px solid #7a1c2b; }
+.topics a:hover { border-bottom: 1px solid var(--accent); }
